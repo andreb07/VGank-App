@@ -1,0 +1,40 @@
+body {
+    &.white {
+        &:before {
+            opacity: .2;;
+        }
+
+        &:after {
+            display: none;
+        }
+
+        #vg-header {
+            &:before {
+                background: #fff;
+            }
+    
+            &:after {
+                background: rgb(0,0,0);
+                background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.84) 92%);
+            }
+    
+            .left {
+                color: #222;
+    
+                .link {
+                    font-weight: 400;
+                }
+            }
+    
+            .center {
+                .logo {
+                    display: none;
+    
+                    &.white {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

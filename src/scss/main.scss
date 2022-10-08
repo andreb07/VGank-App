@@ -1,0 +1,161 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Roboto';    
+    background: $body-color;
+    //min-height: 100vh;
+
+    &.ohidden {
+        overflow: hidden;
+    }
+
+    .bt {
+        margin: 25px auto 0 auto;
+        background: $primary-color;
+        border-radius: 5px;
+        padding: 7px 20px 5px 20px;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 13px;
+        cursor: pointer;
+        background: $primary-color;
+        background: linear-gradient(0deg, #{$primary-color-gradient} 0%, #{$primary-color} 100%);
+        border:1px solid $primary-color;
+        box-sizing: border-box;
+        color: #000;
+
+        &.icon {
+            padding: 2px 2px 0px 3px;
+            margin-left: 8px;
+
+            svg {
+                height: 25px;
+            }
+        }
+
+        &:hover {
+            background: linear-gradient(0deg, #{$primary-color} 0%, #{$primary-color-gradient} 100%);
+        }
+    }
+
+    &:before {
+        content:'';
+        position: fixed;
+        left:0;
+        top:0;
+        width:100%;
+        height: 100%;
+        background: url('../assets/imgs/appbg.jpg') no-repeat;
+        background-position: 50% 0;
+        background-size: cover;
+        pointer-events: none;
+        touch-action: none;
+        z-index: -1;
+        opacity: $body-bg-opacity;
+
+        @media all and (max-width: 1024px) {
+            background: url('../assets/imgs/appbg_mobile.jpg') center no-repeat;
+            background-position: 50% 0;
+            background-size: cover;
+        }
+
+        @media screen and (max-width: 640px) {
+            //display: none;
+        }
+    }
+
+    &:after {
+        content:'';
+        position: fixed;
+        left:0;
+        top:0;
+        width:100%;
+        height: 100%;
+        background: #000;
+        opacity: .5;
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    #vg-loading {        
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 100; 
+        transition: all .5s;
+        transform: scale(0);
+        opacity: 0;
+
+        &.notransition {
+            transition: none;
+        }
+        
+        &.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        &.favorites {
+            transition: none;
+        }
+
+        img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 200px;
+            transform: translate(-50%, -50%);
+
+            @media all and (max-width: 520px) {
+                width: 100px;
+            }
+
+            &.spinner {
+                width: 300px;
+                opacity: .7;
+
+                @media all and (max-width: 520px) {
+                    width: 170px;
+                }
+            }
+        }
+
+    }
+
+    #vg-view {
+        opacity: 0;
+        pointer-events: none;
+
+        &.show {
+            opacity: 1;
+            pointer-events: inherit;
+        }
+    }
+
+    #vg-app {
+        &.favorites,
+        &.untagged,
+        &.reported,
+        &.edit,
+        &.video {
+            
+            #vg-filters {
+                display: none;
+            }
+        }
+
+        &.video,
+        &.edit {
+            #vg-videos {
+                margin-top: 10px;
+            }
+        }
+
+        &.fixed {
+            
+        }
+    }    
+}

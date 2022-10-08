@@ -1,0 +1,7 @@
+{
+  "appId": "pt.abworks.vgank",
+  "appName": "VGank",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+  }
+  
