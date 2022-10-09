@@ -312,6 +312,14 @@
                 display: flex;
             }
 
+            .filter {
+                display: none;
+
+                @media screen and (max-width: 640px) {
+                    display: block;
+                }
+            }
+
             svg {
                 height: 18px;
                 margin-left: 15px;

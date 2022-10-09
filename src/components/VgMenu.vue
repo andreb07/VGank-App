@@ -1,5 +1,6 @@
 <template>
   <section id="vg-menu" class="">
+    <div class="bg" @click="this.$emit('closeMenu');"></div>
       <div class="main">
         <div class="links">
             <div :class="$route.name == 'Homepage' ? 'link active' : 'link'" @click="openLink('/')">{{AppData.translations.header_videos}}</div><br />

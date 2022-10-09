@@ -64,7 +64,7 @@
                     <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"/>
                 </svg>
 
-                <svg :class="hasFilters ? 'filter hasfilters' : 'filter'" viewBox="0 0 36 30" @click="this.openFilters()">
+                <svg v-if="currentRouteName == 'Homepage'" :class="hasFilters ? 'filter hasfilters' : 'filter'" viewBox="0 0 36 30" @click="this.openFilters()">
                     <polygon fill="#231F20" points="14,30 22,25 22,17 35.999,0 17.988,0 0,0 14,17 "/>
                 </svg>
 
@@ -131,9 +131,11 @@ export default {
         openMenu: function(){
             this.$emit('openMenu');
             this.$emit('closeFilters');
+            document.body.classList.add('hidescroll');
         },
 
         openFilters() {
+            document.body.classList.add('hidescroll');
             this.$refs.header.classList.add('filtersopen');
             this.$emit('openFilters');
         },

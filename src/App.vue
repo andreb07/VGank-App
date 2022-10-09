@@ -13,7 +13,7 @@
   <vg-sources ref="sources" @closeModal="closeModal"></vg-sources>
   <vg-tags ref="tags" @closeModal="closeModal"></vg-tags>
   <vg-signin ref="signin" @closeModal="closeModal"></vg-signin>
-  <vg-cookies></vg-cookies>
+  <!--<vg-cookies></vg-cookies>-->
 </template>
 
 <script>
@@ -71,6 +71,7 @@ export default {
 
   mounted: function(){
     window.addEventListener("scroll", this.onScroll);
+    window.addEventListener("resize", this.onResize);
   },
 
   computed: {
@@ -328,6 +329,7 @@ export default {
         filters.classList.remove('open');
         videolist.classList.remove('hasfilters');
         this.$refs.header.$el.classList.remove('filtersopen');
+        document.body.classList.remove('hidescroll');
       } else {
         filters.classList.add('open');
         videolist.classList.add('hasfilters');
@@ -340,11 +342,29 @@ export default {
       this.$refs.header.$el.classList.remove('filtersopen');
       filters.classList.remove('open');
       videolist.classList.remove('hasfilters');     
+      document.body.classList.remove('hidescroll');
     },
 
     closeMenu: function(){
       this.$refs.menu.$el.classList.remove('open');
       this.$refs.header.$el.classList.remove('menuopen');
+      document.body.classList.remove('hidescroll');
+    },
+
+    onResize: function(){
+      let ww = window.innerWidth;
+      let videolist = document.getElementById('vg-videos');
+      let filters = this.$refs.filters.$el;
+
+      if(ww > 1023) {
+        this.closeMenu();
+         if(filters.classList.contains('open')) {
+          filters.classList.remove('open');
+          videolist.classList.remove('hasfilters');
+          this.$refs.header.$el.classList.remove('filtersopen');
+          document.body.classList.remove('hidescroll');
+        }
+      }
     }
   },
 

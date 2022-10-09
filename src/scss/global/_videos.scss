@@ -11,7 +11,7 @@
     @media all and (max-width: 640px) {
         margin: calc(#{$header-height-mobile} + 50px) auto 0 auto;
         transition: opacity .3s;
-        margin: 353px auto 0 auto;
+        margin: 100x auto 0 auto;
 
         &.hasfilters {
             pointer-events: none;
@@ -34,10 +34,10 @@
     }
 
     .no-videos {
-        font-size: 20px;
+        font-size: 14px;
         text-align: center;
         color: #fff;        
-        line-height: 28px;
+        line-height: 22px;
         display: inline-block;
         position: relative;
         padding: 50px;
@@ -67,10 +67,11 @@
             margin: 0;
             opacity: .5;
             font-weight: 300;
+            font-size: 13px;
         }
 
         p {
-            font-size: 18px;
+            font-size: 14px;
             opacity: .7;
             margin: 0;
         }
@@ -246,6 +247,10 @@
 
                 &:hover {
                     text-decoration: underline;
+
+                    @media all and (max-width: 520px) {
+                        text-decoration: none;
+                    }
                 }
             }
 
