@@ -13,14 +13,15 @@
                 </div>
             </div>
         </div>
-        <div :class="'image-box ' + formateImage"  @click="this.$router.push('/video/' + data.id)">
-            <svg class="play" viewBox="0 0 512 512"><path d="M128,96v320l256-160L128,96L128,96z"/></svg> 
-            <img class="" :src="data.thumb" />
+        <div :class="'image-box ' + formateImage"  @click="showVideo()">
+            <svg v-if="!showingVideo" class="play" viewBox="0 0 512 512"><path d="M128,96v320l256-160L128,96L128,96z"/></svg> 
+            <img v-if="!showingVideo" class="" :src="data.thumb" />
+            <iframe v-if="showingVideo" id="ytplayer" type="text/html" :src="videourl" allowfullscreen />
         </div>   
 
         <div class="bottom">       
         
-            <div class="info" @click="this.$router.push('/video/' + data.id)">
+            <div class="info">
                 <div class="date">{{data.date}}</div>  
                 <div class="channel" v-html="data.channel"></div>
                 <div class="description" v-html="data.description"></div> 
@@ -91,11 +92,25 @@ export default {
       return {
         disabled: false,
         isSending: false,
+        showingVideo: false,
       }
     },
 
     computed: {
         ...mapGetters([ 'AppFilters' , 'AppData' , 'AppUser', 'AppApi' ]),
+        
+        videourl: function(){
+            let url = 'http://www.youtube.com/embed/';
+            let autoplay = 'autoplay=1';
+            let mute = '&mute=0';
+            let origin = '&origin=' + window.location.origin;
+            let mb = '&modestbranding=1';
+            let showinfo = '&showinfo=0';
+            let rel = '&rel=0';
+            let controls = '&controls=1';
+
+            return url + this.data.youtube_id + '?' + autoplay + mute + mb + showinfo + rel + controls + origin;
+        },
 
         videoChamps: function(){
             const self = this;
@@ -275,6 +290,10 @@ export default {
                 this.removeVideo(this.data.id);
                  this.isSending = false;
             } 
+        },
+
+        showVideo: function(){
+            this.showingVideo = true;
         }
       
     }
