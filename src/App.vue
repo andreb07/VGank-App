@@ -13,6 +13,8 @@
   <vg-sources ref="sources" @closeModal="closeModal"></vg-sources>
   <vg-tags ref="tags" @closeModal="closeModal"></vg-tags>
   <vg-signin ref="signin" @closeModal="closeModal"></vg-signin>
+  <vg-reported ref="reported" @closeModal="closeModal"></vg-reported>
+  <vg-refresh></vg-refresh>
   <!--<vg-cookies></vg-cookies>-->
 </template>
 
@@ -28,12 +30,14 @@ import VgRanks from "./modals/VgRanks.vue";
 import VgSources from "./modals/VgSources.vue";
 import VgTags from "./modals/VgTags.vue";
 import VgSignin from "./modals/VgSignin.vue";
+import VgReported from "./modals/VgReported.vue";
+import VgRefresh from "./components/VgRefresh.vue";
 import { mapActions, mapGetters } from "vuex";
 import axios from 'axios';
 import { useHead } from "@vueuse/head";
 
 export default {
-  components: { VgHeader, VgLoading, VgFilters, VgChampions, VgRanks, VgRoles, VgSources, VgTags, VgSignin, VgMenu, VgCookies},
+  components: { VgHeader, VgLoading, VgFilters, VgChampions, VgRanks, VgRoles, VgSources, VgTags, VgSignin, VgMenu, VgCookies, VgReported, VgRefresh},
 
   data() { return { 
     loaded: false, 
@@ -79,7 +83,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fecthInitialData', 'getUserData', 'setFavoritesList', 'updatePage', 'addVideos', 'setUntaggedList', 'changeEditingModal', 'setReportedList', 'getReportedVideos']),
+    ...mapActions(['fecthInitialData', 'getUserData', 'setFavoritesList', 'updatePage', 'addVideos', 'setUntaggedList', 'changeEditingModal', 'setReportedList', 'getReportedVideos', 'addReportedVideo']),
 
     configViews: async function(view){
 
@@ -89,9 +93,11 @@ export default {
       vgapp.classList.remove(...vgapp.classList);
       vgapp.classList.add(view.toLowerCase());
 
-      screen.orientation.lock('portrait').catch(function(error) {
-          if(!error)  window.screen.orientation.lock('portrait');
-      });
+      if(screen.orientation) {
+        screen.orientation.lock('portrait').catch(function(error) {
+          if(!error) window.screen.orientation.lock('portrait');
+        });
+      }     
 
       switch(view) {
         case 'Favorites':
@@ -125,9 +131,6 @@ export default {
           document.getElementById("vg-filters").classList.remove('hideclose');
           document.getElementById("vg-app").classList.add("fixed");
           this.showViews();
-          screen.orientation.lock('portrait').catch(function(error) {
-              if(!error) window.screen.orientation.unlock();
-          });
         break;
         case 'Homepage':        
           document.getElementById("vg-filters").classList.add('hideclose');
@@ -153,12 +156,14 @@ export default {
       let vgview = document.getElementById("vg-view"); 
       let vgfavorites = document.getElementById("vg-favorites"); 
       let vguntagged = document.getElementById("vg-untagged"); 
+      let vgheader = document.getElementById("vg-header"); 
       vgloader.classList.remove('notransition', 'show');
 
       setTimeout(function(){        
         vgview.classList.add('show');
         if(vgfavorites) vgfavorites.classList.add('show');
         if(vguntagged) vguntagged.classList.add('show');
+        if(vgheader) vgheader.classList.add('show');
       }, 300);      
     },
 
@@ -233,6 +238,13 @@ export default {
       for (let i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
       }
+
+      if(type == 'reported') {
+        this.$refs.reported.$el.classList.add('modal', 'show', data.reportedType);
+        this.addReportedVideo(data.vid)
+        return;
+      }
+      
       if(data) {
        this.configModal(modal, data.vid, data.vidtype, type);        
       }
@@ -245,7 +257,8 @@ export default {
       this.changeEditingModal(false);
     },
 
-    configModal: function(modal, vid, vidtype, type){
+    configModal: function(modal, vid, vidtype, type) {
+
       modal.setAttribute('vid', vid);
       modal.setAttribute('vidtype', vidtype);
 

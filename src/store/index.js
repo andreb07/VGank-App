@@ -163,6 +163,7 @@ const store = createStore({
         updateVideo: function({commit}, data) { commit('updateVideo', data); },
         removeVideo: function({commit}, data){ commit('removeVideo', data); },
         removeReportedVideo: function({commit}, data){ commit('removeReportedVideo', data); },
+        addReportedVideo: function({commit}, data){ commit('addReportedVideo', data); },        
         updateTags: function({commit}, data) { commit('updateTags', data); },
         addVideos: function({commit}, data) { commit('addVideos', data); },
         updatePage: function({commit}, data) { commit('updatePage', data); },
@@ -346,6 +347,10 @@ const store = createStore({
                     state.reported.splice(idx, 1);
                 }
             });
+        },
+
+        addReportedVideo: function(state, data) {
+            state.reported.push(data);
         },
 
         updateTags: function(state, data) {

@@ -36,6 +36,16 @@
             </div>
 
             <div class="actions">
+                <div v-if="AppUser">
+                    <div :class="videoReported ? 'item report blocked' : 'item report'" v-if="AppUser.istagger" @click="reportVideo($event)">
+                        <label>{{AppData.translations.video_report_label}}</label>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M13.18,4l0.24,1.2L13.58,6h0.82H19v7h-5.18l-0.24-1.2L13.42,11H12.6H6V4H13.18 M14,3H5v18h1v-9h6.6l0.4,2h7V5h-5.6L14,3 L14,3z"></path>
+                            <rect x="5.8" y="3.9" width="7.7" height="7.4"/>
+                            <rect x="13.3" y="5.5" width="6" height="7.8"/>
+                        </svg>
+                    </div>
+                </div>                
                 <div class="item" v-if="AppUser">
                     <label v-if="!videofavorite">{{AppData.translations.edit_save_label}}</label>
                     <label v-else>{{AppData.translations.edit_remove_label}}</label>
@@ -167,7 +177,24 @@ export default {
               }                 
           }           
           return seen;
-      }
+      },
+
+      videoReported: function() {
+            let reported = false;
+
+            if(this.AppUser) {
+                if(this.AppReported) {                   
+                    this.AppReported.some((vid) => {
+
+                       if(vid.id == this.data.id) {
+                        reported = true;
+                       }
+                    });
+                }
+            }
+
+            return reported;
+        }
     },
 
     methods: {
@@ -197,13 +224,16 @@ export default {
             this.addVideoToEdit(this.data);
         },
 
-        reportVideo: async function(){
+        reportVideo: async function(e){
+
+            if(e.currentTarget.classList.contains('blocked')) return;
+
             let response = await axios.post(this.AppApi.setReported, { 
                 vid: this.data.id,
                 uid: this.AppUser.ID
             });
 
-            this.$emit('openModal', 'reported', {reportedType:response.data.status});
+            this.$emit('openModal', 'reported', {reportedType:response.data.status, vid:this.data});
         }
       
     }

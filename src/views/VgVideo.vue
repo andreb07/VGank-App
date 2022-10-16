@@ -147,6 +147,33 @@ export default {
       })
     },  
 
+    mounted: function(){
+      document.addEventListener("fullscreenchange", function() {
+        if(!screen.orientation) return;
+
+        if(!document.fullscreenElement) {
+          screen.orientation.lock('portrait').catch(function(error) {
+              if(!error) window.screen.orientation.lock('portrait');
+          });
+        } else {
+          window.screen.orientation.unlock();
+        }
+      }, false);
+
+      document.addEventListener("webkitfullscreenchange", function() {
+        if(!screen.orientation) return;
+        
+        if(!document.webkitIsFullScreen) {
+          screen.orientation.lock('portrait').catch(function(error) {
+              if(!error) window.screen.orientation.lock('portrait');
+          });
+        } else {
+          window.screen.orientation.unlock();
+        }
+      }, false);
+
+    },  
+
     computed: {
       ...mapGetters(['AppLoaded', 'AppVideos', 'AppData', 'AppFilters', 'AppUntagged', 'AppUser', 'AppApi', 'AppReported', 'AppShareLinks', 'AppUrl']),
 
@@ -173,7 +200,7 @@ export default {
       videourl: function(){
         let url = 'http://www.youtube.com/embed/';
         let autoplay = 'autoplay=1';
-        let mute = '&mute=1';
+        let mute = '&mute=0';
         let origin = '&origin=' + window.location.origin;
         let mb = '&modestbranding=1';
         let showinfo = '&showinfo=0';
@@ -322,7 +349,7 @@ export default {
     },
 
     methods: {
-      ...mapActions(['updateUserFavs', 'updateUserSeen']),
+      ...mapActions(['updateUserFavs', 'updateUserSeen', 'addReportedVideo']),
 
        bookmarkVideo: async function() {
 
@@ -357,7 +384,6 @@ export default {
         },
 
         reportVideo: async function(){
-          console.log('REPORT VIDEO', this.videodata.id, this.AppUser.ID);
 
           let report = await axios.post(this.AppApi.setReported, { 
               vid: this.videodata.id,
@@ -365,6 +391,7 @@ export default {
           });
 
           this.$refs.reported.$el.classList.add('modal', 'show', report.data.status);
+          this.addReportedVideo(this.videodata);
         },
 
          closeModal: function(){

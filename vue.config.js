@@ -23,6 +23,7 @@ module.exports = {
             @import "@/scss/modals/_reported.scss";
             @import "@/scss/global/_white.scss";
             @import "@/scss/global/_cookies.scss";
+            @import "@/scss/global/_refresh.scss";
           `
         }
       }

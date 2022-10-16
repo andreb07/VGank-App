@@ -17,6 +17,10 @@
             pointer-events: none;
             touch-action: none;
         }
+
+        &.moving {
+            transition: transform .3s;
+        }
     }
 
     @media all and (max-width: 520px) {
@@ -24,7 +28,11 @@
     }
 
     &.edit {
-        margin-top: 150px !important;
+        margin-top: 150px;
+
+        @media all and (max-width: 520px) {
+            margin-top: $header-height-mobile;
+        }
     }
 
     &.block {
@@ -443,6 +451,10 @@
                         fill: $white;
                     }
 
+                    rect {
+                        fill: none;
+                    }
+
                     &.save {
 
                         path {
@@ -465,6 +477,25 @@
                             stroke-width: 10;
                         }
                     }
+                }
+
+                &.report {
+                    margin-right: 2px;
+
+                    &.blocked {
+                        svg {
+                            path,
+                            rect {
+                                fill: #d94f4f;
+                            }
+                        }
+                    }
+
+                    @media all and (max-width: 640px) {
+                        svg {
+                            height: 25px;
+                        }
+                    }   
                 }
             }
 

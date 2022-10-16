@@ -23,6 +23,7 @@
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^3.6.5",
     "es6-promise-plugin": "^4.2.2",
+    "mobile-device-detect": "^0.4.3",
     "ts-md5": "^1.2.10",
     "vue": "^3.2.21",
     "vue-meta": "^3.0.0-alpha.2",

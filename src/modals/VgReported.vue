@@ -9,8 +9,8 @@
               </div>
             <h2>{{AppData.translations.report_title}}</h2>            
             <div class="area created" v-html="AppData.translations.reported_text_1"></div>
-            <div class="area exists"  v-html="AppData.translations.reported_text_2">
-            </div>
+            <div class="area exists"  v-html="AppData.translations.reported_text_2"></div>
+            <div class="bt" @click="closeModal">Close</div>
         </div>
   </section>
 </template>
