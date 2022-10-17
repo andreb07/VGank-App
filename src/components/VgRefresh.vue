@@ -14,9 +14,17 @@ export default {
     components: { VgLoading },
 
     mounted: function() {
+        console.log('REFRESH MOUNTED!!!');
         document.addEventListener('touchstart', this.onSwipeStart.bind(this));
         document.addEventListener('touchend', this.onSwipeEnd.bind(this));
         document.addEventListener('touchmove', this.onTouchMove.bind(this));
+    },
+
+    unmounted: function() {
+        console.log('UNMOUNTED!!!');
+        document.removeEventListener('touchstart', this.onSwipeStart.bind(this), false);
+        document.removeEventListener('touchend', this.onSwipeEnd.bind(this), false);
+        document.removeEventListener('touchmove', this.onTouchMove.bind(this), false);
     },
 
     data() {
@@ -39,7 +47,7 @@ export default {
         ...mapActions(['updateVideos', 'updateQuery']),
 
         onTouchMove: function(e){
-            if(!this.sEnabled || this.isRefreshing) return;
+            if(!this.sEnabled || this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage') return;
 
             let changedTouches = e.changedTouches[0];
             let changeY = 0;
@@ -56,7 +64,6 @@ export default {
             let vgrefresh = document.getElementById('vg-refresh');
 
             if(Math.abs(changeY) > this.sScrollSize) {
-                8
                 vgvideos.classList.add('moving');
                 this.refresh();
             } else {
@@ -69,7 +76,7 @@ export default {
         },
 
         onSwipeStart: function(e){     
-            if(this.isRefreshing) return;
+            if(this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage') return;
 
             let vgvideos = document.getElementById('vg-videos');
             
@@ -89,7 +96,7 @@ export default {
         },
 
         onSwipeEnd: function(e){
-           if(!this.sEnabled || this.isRefreshing) return;
+           if(!this.sEnabled || this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage') return;
 
             let changedTouches = e.changedTouches[0];
             if(changedTouches) {
@@ -104,7 +111,7 @@ export default {
         },
 
         onFinishSwipe: function(){
-            if(this.isRefreshing) return;
+            if(this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage') return;
 
             let vgvideos = document.getElementById('vg-videos');
             let vgrefresh = document.getElementById('vg-refresh');

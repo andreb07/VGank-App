@@ -14,7 +14,7 @@
   <vg-tags ref="tags" @closeModal="closeModal"></vg-tags>
   <vg-signin ref="signin" @closeModal="closeModal"></vg-signin>
   <vg-reported ref="reported" @closeModal="closeModal"></vg-reported>
-  <vg-refresh></vg-refresh>
+  <vg-refresh v-if="this.$route.name == 'Homepage'"></vg-refresh>
   <!--<vg-cookies></vg-cookies>-->
 </template>
 
@@ -354,7 +354,7 @@ export default {
       let videolist = document.getElementById('vg-videos');
       this.$refs.header.$el.classList.remove('filtersopen');
       filters.classList.remove('open');
-      videolist.classList.remove('hasfilters');     
+      if(videolist) videolist.classList.remove('hasfilters');     
       document.body.classList.remove('hidescroll');
     },
 

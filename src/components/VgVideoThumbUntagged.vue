@@ -100,7 +100,7 @@ export default {
         ...mapGetters([ 'AppFilters' , 'AppData' , 'AppUser', 'AppApi' ]),
         
         videourl: function(){
-            let url = 'http://www.youtube.com/embed/';
+            let url = 'https://www.youtube.com/embed/';
             let autoplay = 'autoplay=1';
             let mute = '&mute=0';
             let origin = '&origin=' + window.location.origin;
