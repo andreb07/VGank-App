@@ -19,7 +19,8 @@
                             </svg>
                             <p>{{AppData.translations.header_sign_in}}</p>    
                         </div>
-                        <div class="link" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
+                        <div :class="this.$route.name == 'Homepage' ? 'link active' : 'link'" @click="$router.push({path: '/'});">{{AppData.translations.header_videos}}</div>
+                        <div :class="this.$route.name == 'About' ? 'link active' : 'link'" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
                     </div>
                 </div>
                 <div v-else>
