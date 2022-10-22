@@ -5,6 +5,7 @@ import VgReported from '../views/VgReported.vue';
 import VgFavorites from '../views/VgFavorites.vue';
 import VgVideo from '../views/VgVideo.vue';
 import VgEdit from '../views/VgEdit.vue';
+import VgAbout from '../views/VgAbout.vue';
 
 const routes = [
   {
@@ -40,6 +41,13 @@ const routes = [
     name: 'Favorites',
     components: {
       main: VgFavorites
+    }
+  },
+  {
+    path: '/about',
+    name: 'About',
+    components: {
+      main: VgAbout
     }
   },
   {

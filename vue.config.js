@@ -17,6 +17,7 @@ module.exports = {
             @import "@/scss/modals/_sources.scss";
             @import "@/scss/modals/_tags.scss";
             @import "@/scss/modals/_signin.scss";
+            @import "@/scss/modals/_about.scss";
             @import "@/scss/global/_video.scss";
             @import "@/scss/global/_untagged.scss";
             @import "@/scss/global/_menu.scss";

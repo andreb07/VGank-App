@@ -19,7 +19,7 @@
                             </svg>
                             <p>{{AppData.translations.header_sign_in}}</p>    
                         </div>
-                        <div class="link">{{AppData.translations.header_about}}</div>
+                        <div class="link" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
                     </div>
                 </div>
                 <div v-else>
@@ -27,6 +27,7 @@
                         <div class="profile" @click="this.logout()">{{getProfileName}}</div>
                         <div :class="this.$route.name == 'Homepage' ? 'link active' : 'link'" @click="$router.push({path: '/'});">{{AppData.translations.header_videos}}</div>
                         <div :class="this.$route.name == 'Favorites' ? 'link active' : 'link'" @click="$router.push({path: '/favorites'});">{{AppData.translations.header_favorites}}</div>
+                        <div class="link" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
                         <div v-if="this.AppUser.istagger" class="link submenu">
                             {{AppData.translations.header_manager}}
                             <div class="manager">
