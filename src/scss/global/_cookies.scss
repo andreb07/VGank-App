@@ -1,85 +1,38 @@
-#vg-cookies {
+#vg-cookies-bar {
     position: fixed;
     z-index: 20000;
     bottom: 0;
-    left: 0;
-    padding: 40px 0;
+    left: 50%;
+    padding: 20px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(100%);
     pointer-events: none;
     transition: .3s;
+    max-width: 430px;
+    border-top-right-radius: 10px;
+    transform: translate(-50%, 100%);
+    text-align: center;
+    color: #fff;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 18px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: #000;
+    padding: 20px 50px 15px 50px;
 
     &.open {
-        transform: translateX(0);
+        transform: translate(-50%, 0);
         pointer-events: all;
     }
 
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top:0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        opacity: 1;
+    a {
+        color: $primary-color;
+        text-decoration: none;
     }
 
-    .main {
-        position: relative;
-        max-width: 1380px;
-        color: $primary-color;
-        font-weight: 300;
-        font-size: 13px;
-        line-height: 18px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        @media all and (max-width: 1440px) {
-            width: 90%;
-        }
-
-        @media all and (max-width: 680px) {
-            display: block;
-            text-align: center;
-        }
-
-        .col {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-
-            @media all and (max-width: 680px) {
-                display: block;
-            }
-
-            &.r {
-                width: 50%;
-                margin-left: 50px;
-
-                @media all and (max-width: 680px) {
-                    width: auto;
-                    margin: 30px auto 0 auto;
-                }
-            }
-
-            a {
-                color: #fff;
-                margin-right: 15px;
-                text-decoration: none;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .bt {
-                margin: 0;
-            }
-        }
+    .bt {
+        margin: 5px;
+        font-size: 9px;
+        padding: 2px 20px 1px 20px;
     }
 }

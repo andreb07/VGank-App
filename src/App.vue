@@ -15,7 +15,7 @@
   <vg-signin ref="signin" @closeModal="closeModal"></vg-signin>
   <vg-reported ref="reported" @closeModal="closeModal"></vg-reported>
   <vg-refresh v-if="this.$route.name == 'Homepage'"></vg-refresh>
-  <!--<vg-cookies></vg-cookies>-->
+  <vg-cookies></vg-cookies>
 </template>
 
 <script>

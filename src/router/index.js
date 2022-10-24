@@ -7,6 +7,7 @@ import VgVideo from '../views/VgVideo.vue';
 import VgEdit from '../views/VgEdit.vue';
 import VgAbout from '../views/VgAbout.vue';
 import VgPrivacy from '../views/VgPrivacy.vue';
+import VgCookies from '../views/VgCookies.vue';
 
 const routes = [
   {
@@ -56,6 +57,13 @@ const routes = [
     name: 'Privacy',
     components: {
       main: VgPrivacy
+    }
+  },
+  {
+    path: '/cookies',
+    name: 'Cookies',
+    components: {
+      main: VgCookies
     }
   },
   {

@@ -127,7 +127,6 @@ export default {
             this.isRefreshing = true;
 
             document.body.classList.add('locked');
-            console.log('DOING REFRESH');
 
             this.updateQuery({page: 0,filters: this.AppFilters});
             if(this.$route.name == 'Video') this.$router.push('/');

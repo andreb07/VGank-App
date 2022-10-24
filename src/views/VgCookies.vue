@@ -1,6 +1,6 @@
 <template>
-    <section id="vg-privacy">
-      <div class="content" v-html="AppData.translations.privacy_content"></div>
+    <section id="vg-about">
+        <div class="content" v-html="AppData.translations.cookie_page"></div>        
     </section>
 </template>
 

@@ -1,12 +1,7 @@
 <template>
-  <section ref="cookies" id="vg-cookies" class="">
-      <div class="main">
-            <div class="col">{{AppData.translations.cookie_bar}}</div>
-            <div class="col r">
-                <a v-if="AppData.translations.cookie_bar_link" href="#">{{AppData.translations.cookie_bar_link}}</a>
-                <div class="bt" @click="this.setCookies()">{{AppData.translations.cookie_bar_button}}</div>
-            </div>
-      </div>     
+  <section ref="cookies" id="vg-cookies-bar" class="">
+    <div class="content" v-html="AppData.translations.cookie_bar"></div>   
+    <div class="bt" @click="this.setCookies">I Accept all cookies</div> 
   </section>
 </template>
 
@@ -24,6 +19,8 @@ export default {
     created: async function() {
         const cookie = await Storage.get({ key: 'vgcookies' });
         let view = this;
+
+        console.log(cookie);
 
         setTimeout(function(){
             if(!cookie.value) view.$refs.cookies.classList.add('open');

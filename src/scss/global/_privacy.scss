@@ -25,33 +25,35 @@
     .content  {
         line-height: 28px;
         font-size: 16px;
-        color: #fff !important;
+        color: #c9c9c9;
         max-width: 960px;
         margin: 150px auto 0 auto;
         padding: 50px;        
         position: relative;
 
-        span, bdt, strong, em, u{
-            color: #fff !important;
+        strong {
+            color: #fff;
+            font-weight: normal;
         }
 
-        em, u{
+        h2, h3, h4 {
+            color: $primary-color;
+        }
+
+        h6 {
             opacity: .5;
+            font-weight: 300;
         }
 
-        td {
-            border-color: #fff !important;
-            padding: 10px;
-        }
-
-        [data-custom-class="title"],
-        [data-custom-class="heading_1"] {
-            color: $primary-color !important;
+        .header {
+            h6 {
+                margin-top: -20px;
+            }
         }
 
         a {
             text-decoration: none;
-            color: #fff !important;
+            color: $primary-color;
 
             &:hover {
                 color: $primary-color !important;
