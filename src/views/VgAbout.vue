@@ -1,6 +1,7 @@
 <template>
     <section id="vg-about">
         <div class="content" v-html="AppData.translations.about_content"></div>
+        
     </section>
 </template>
 

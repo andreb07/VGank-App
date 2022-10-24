@@ -28,8 +28,8 @@
                         <div class="profile" @click="this.logout()">{{getProfileName}}</div>
                         <div :class="this.$route.name == 'Homepage' ? 'link active' : 'link'" @click="$router.push({path: '/'});">{{AppData.translations.header_videos}}</div>
                         <div :class="this.$route.name == 'Favorites' ? 'link active' : 'link'" @click="$router.push({path: '/favorites'});">{{AppData.translations.header_favorites}}</div>
-                        <div class="link" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
-                        <div v-if="this.AppUser.istagger" class="link submenu">
+                        <div :class="this.$route.name == 'About' ? 'link active' : 'link'" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
+                        <div v-if="this.AppUser.istagger" :class="this.$route.name == 'Untagged' || this.$route.name == 'Reported' ? 'link submenu active' : 'link submenu'">
                             {{AppData.translations.header_manager}}
                             <div class="manager">
                                 <div @click="$router.push({path: '/untagged'});" :class="this.$route.name == 'Untagged' ? 'link active' : 'link'">

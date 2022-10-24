@@ -6,6 +6,7 @@ import VgFavorites from '../views/VgFavorites.vue';
 import VgVideo from '../views/VgVideo.vue';
 import VgEdit from '../views/VgEdit.vue';
 import VgAbout from '../views/VgAbout.vue';
+import VgPrivacy from '../views/VgPrivacy.vue';
 
 const routes = [
   {
@@ -48,6 +49,13 @@ const routes = [
     name: 'About',
     components: {
       main: VgAbout
+    }
+  },
+  {
+    path: '/privacy',
+    name: 'Privacy',
+    components: {
+      main: VgPrivacy
     }
   },
   {

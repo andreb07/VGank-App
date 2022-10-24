@@ -25,6 +25,7 @@ module.exports = {
             @import "@/scss/global/_white.scss";
             @import "@/scss/global/_cookies.scss";
             @import "@/scss/global/_refresh.scss";
+            @import "@/scss/global/_privacy.scss";
           `
         }
       }
