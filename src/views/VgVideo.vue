@@ -132,8 +132,9 @@ export default {
     components: { VgReported },
 
     created: function() {
+      
       useHead({
-        title: () => 'VGank :: ' + this.videodata.description,
+        title: () => 'VGank / ' + this.videodata.description,
         meta: [
           { name: 'description',content: () => this.AppData.translations.site_description},
           { property: "og:title", content: () => this.AppData.translations.site_title },

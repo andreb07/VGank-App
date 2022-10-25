@@ -128,6 +128,8 @@ export default {
           }
         break;
         case 'Video':
+          // eslint-disable-next-line
+          gtag('event', 'view_video');
           document.getElementById("vg-filters").classList.remove('hideclose');
           document.getElementById("vg-app").classList.add("fixed");
           this.showViews();
