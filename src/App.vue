@@ -170,8 +170,13 @@ export default {
     },
 
     onScroll: function () {
+      console.log('onscroll', this.$route.name);
 
-      if(this.$route.name == 'Favorites') return;
+      if(this.$route.name == 'Favorites' ||
+         this.$route.name == 'About' ||
+         this.$route.name == 'Privacy' ||
+         this.$route.name == 'Untagged' ||
+         this.$route.name == 'Reported' ) return;
 
       let vgapp = document.getElementById("vg-app");
       let vgheader = document.getElementById("vg-header");

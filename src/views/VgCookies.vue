@@ -1,6 +1,6 @@
 <template>
     <section id="vg-about">
-        <div class="content" v-html="AppData.translations.cookie_page"></div>        
+        <div class="content" v-html="AppData.translations.cookie_page"></div>      
     </section>
 </template>
 

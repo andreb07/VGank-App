@@ -8,16 +8,13 @@
     pointer-events: none;
     transition: .3s;
     max-width: 430px;
-    border-top-right-radius: 10px;
     transform: translate(-50%, 100%);
     text-align: center;
     color: #fff;
     font-weight: 300;
     font-size: 13px;
     line-height: 18px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background: #000;
+    background: $header-bg;
     padding: 20px 50px 15px 50px;
     
     @media screen and (max-width: 723px) {
@@ -39,6 +36,7 @@
         margin: 5px;
         font-size: 9px;
         padding: 2px 20px 1px 20px;
+        margin-bottom: 15px;
     }
 
     p {
@@ -46,5 +44,11 @@
             width: 90%;
             margin: 15px auto;
         }
+    }
+
+    .link {
+        color: $primary-color;
+        text-decoration: none;
+        margin-bottom: 20px;
     }
 }

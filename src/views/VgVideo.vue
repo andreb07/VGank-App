@@ -26,7 +26,7 @@
               </div>
             </div>  
             <div class="bottom">
-              <a target="_blank" :href="'https://www.youtube.com/channel/' + videoChannel.youtube_id">
+              <a @click="openYoutubeChannel()">
                 <img class="channelimage" :src="videoChannel.image" />
                 <div class="channelname">
                   <div class="channel" v-html="videoChannel.name"></div>  
@@ -368,6 +368,9 @@ export default {
             });
 
             this.disabled = false;
+
+            // eslint-disable-next-line
+            gtag('event', 'bookmark_video');
         },
 
         updateSeenVideo: async function(){
@@ -393,6 +396,9 @@ export default {
 
           this.$refs.reported.$el.classList.add('modal', 'show', report.data.status);
           this.addReportedVideo(this.videodata);
+
+          // eslint-disable-next-line
+          gtag('event', 'report_video');
         },
 
          closeModal: function(){
@@ -407,6 +413,17 @@ export default {
           } else {
             icons.classList.add('show');
           }
+
+          // eslint-disable-next-line
+          gtag('event', 'open_share');
+        },
+
+        openYoutubeChannel: function() {
+          let link = 'https://www.youtube.com/channel/' + this.videoChannel.youtube_id;
+          window.open(link, '_blank');
+
+          // eslint-disable-next-line
+          gtag('event', 'open_youtube_channel');
         }
     },
 

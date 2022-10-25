@@ -199,6 +199,9 @@ export default {
             this.$refs.filter.classList.remove('show');
             this.$emit('closeFilters');
             document.getElementById('vg-videos').classList.remove('block');
+
+            // eslint-disable-next-line
+            gtag('event', 'filter_videos');
             
         },
 

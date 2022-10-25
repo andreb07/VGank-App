@@ -1,6 +1,7 @@
 <template>
   <section ref="cookies" id="vg-cookies-bar" class="">
     <div class="content" v-html="AppData.translations.cookie_bar"></div>   
+    <div class="link" @click="$router.push({path: '/cookies'})">More information</div>  
     <div class="bt" @click="this.setCookies">I Accept all cookies</div> 
   </section>
 </template>
@@ -17,20 +18,20 @@ export default {
     },
 
     created: async function() {
-        const cookie = await Storage.get({ key: 'vgcookies' });
+        const acceptedcookies = await Storage.get({ key: 'acceptedcookies' });
         let view = this;
 
-        console.log(cookie);
-
-        setTimeout(function(){
-            if(!cookie.value) view.$refs.cookies.classList.add('open');
-        }, 2000);
+        if(!acceptedcookies.value) {
+            setTimeout(function(){
+                view.$refs.cookies.classList.add('open');
+            }, 2000);
+        }
         
     },
 
     methods: {
         setCookies: function(){
-            Storage.set({key: 'vgcookies', value: true});
+            Storage.set({key: 'acceptedcookies', value: '1'});
             this.$refs.cookies.classList.remove('open');
         }
     }
