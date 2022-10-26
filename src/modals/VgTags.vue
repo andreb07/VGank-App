@@ -8,12 +8,6 @@
                 </svg>
             </div>
             <h2>Select a tag</h2>
-            <!--<div class="search" v-if="AppUser && $route.name == 'Untagged'">
-                <input type="text" placeholder="New Tag" v-model="newtag" />
-                <div v-if="newtag != ''" class="bt" @click="addTag()">Add</div>
-                <img v-if="isSending" class="loader" src="/img/loader.gif" />
-                <div class="error">{{errorMsg}}</div>
-            </div>-->
             <div class="list">
                 <div :class="'item blank ' + showClear"  @click="choose()">
                     <p>None</p>

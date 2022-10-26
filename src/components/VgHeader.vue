@@ -5,8 +5,7 @@
         <div class="container">
 
             <div class="logo">            
-                <img src="/img/vgank_logo.svg" alt="VGank" @click="$router.replace({path: '/'});" />   
-                <img class="white" src="/img/vgank_logo_white.svg" alt="VGank" @click="$router.replace({path: '/'});" />  
+                <img :src="logo" alt="VGank" @click="$router.replace({path: '/'});" />   
             </div>
 
             <div class="desktop">
@@ -90,6 +89,10 @@ import { mapActions, mapGetters} from 'vuex';
 import { Storage } from '@capacitor/storage';
 
 export default {
+
+    data: () => ({
+        logo: require('@/assets/imgs/vgank_logo.svg'),
+    }),
 
     computed: {
         ...mapGetters(['AppData', 'AppUser', 'AppUntagged', 'AppReported', 'AppFilters']),

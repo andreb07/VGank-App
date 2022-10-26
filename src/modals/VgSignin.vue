@@ -14,7 +14,7 @@
                   <input type="password" :placeholder="AppData.translations.login_password" v-model="login_password" autocomplete="on" />
                   <div @click="doLogin" class="bt">{{AppData.translations.login_button}}</div>
                   <p class="errors" v-html="errors"></p>
-                  <img v-if="isWorking" class="loader" src="/img/loader.gif" />
+                  <img v-if="isWorking" class="loader" :src="loader" />
               </form> 
 
               <div class="register">
@@ -34,7 +34,7 @@
                 <div @click="doRegister" class="bt">{{AppData.translations.register_button}}</div>
                 <div @click="changeToLogin" class="link">{{AppData.translations.register_back}}</div>
                 <p class="errors register" v-if="errors" v-html="errors"></p>
-                <img v-if="isWorking" class="loader" src="/img/loader.gif" />
+                <img v-if="isWorking" class="loader" :src="loader" />
               </form>
             </div>
         </div>
@@ -57,7 +57,8 @@ export default {
           'register_password': '',
           'register_password2': '',
           'errors': '',
-          'isWorking': false
+          'isWorking': false,
+           loader: require('@/assets/imgs/loader.gif'),
       }
     },
 

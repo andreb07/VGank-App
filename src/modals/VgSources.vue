@@ -9,8 +9,10 @@
             </div>
             <h2>{{AppData.translations.source_title}}</h2>
             <div class="list">
-                <div class="item blank" v-if="AppFilters.channel">
-                    <img src="/img/close_icon.svg" alt="clear" @click="choose()" />
+                <div :class="'item blank ' + showClear" @click="choose()">
+                    <svg viewBox="0 0 48 48">
+                        <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
+                    </svg>
                     <p>{{AppData.translations.source_clear}}</p>
                 </div>
                 <div v-for="source in AppData.channels" class="item" :key="source.id" @click="choose(source.id)">
@@ -28,7 +30,13 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
 
     computed: {
-        ...mapGetters([ 'AppData', 'AppFilters']),
+        ...mapGetters([ 'AppData', 'AppFilters', 'AppEditingModal']),
+
+        showClear: function(){
+            let showclear = '';
+            if(this.AppFilters.channel || this.AppEditingModal) showclear = 'show';
+            return showclear;
+        }
     },
 
     methods: {

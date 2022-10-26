@@ -23,6 +23,23 @@
 
                 &.show {
                     display: inline-block;
+
+                    svg {
+                        width: 68px;
+                        height: 68px;
+                        border: 2px solid #5c4d2d;
+                        border-radius: 50%;
+                        padding: 10px;
+
+                        @media all and (max-width: 540px) {
+                            width: 61px;
+                            height: 61px;
+                        }
+
+                        path {
+                            fill: #333;
+                        }
+                    }
                 }
 
                 img {
@@ -48,12 +65,18 @@
             }
 
             &:hover {
-                color: $primary-color;
+                @media all and (min-width: 640px) {
+                    color: $primary-color;
 
-                img {
-                    border: 2px solid $primary-color;
-                    box-shadow: 0px 0px 24px -9px rgba(255, 255, 255, 0.5);
-                    -webkit-box-shadow: 0px 0px 24px -9px rgba(255, 255, 255, 0.5);
+                    img, svg {
+                        border: 2px solid $primary-color !important;
+                        box-shadow: 0px 0px 24px -9px rgba(255, 255, 255, 0.5) !important;
+                        -webkit-box-shadow: 0px 0px 24px -9px rgba(255, 255, 255, 0.5) !important;
+
+                        path {
+                            fill: #666 !important;
+                        }
+                    }
                 }
             }
 

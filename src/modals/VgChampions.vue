@@ -19,8 +19,10 @@
             </div>
 
             <div class="list">
-                <div :class="'item blank ' + showClear">
-                    <img src="/img/close_icon.svg" alt="clear" @click="choose($event, null)" />
+                <div :class="'item blank ' + showClear" @click="choose()">
+                    <svg viewBox="0 0 48 48">
+                        <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
+                    </svg>
                     <p>{{AppData.translations.champion_clear}}</p>
                 </div>
                 <div v-for="champ in filteredChamps" class="item" :key="champ.id" :cid="champ.id" @click="choose($event, champ.id)">

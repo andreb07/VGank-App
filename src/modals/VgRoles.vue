@@ -10,7 +10,9 @@
             <h2>{{AppData.translations.role_title}}</h2>
             <div class="list">
                 <div :class="'item blank ' + showClear">
-                    <img src="/img/close_icon.svg" alt="clear" @click="choose()" />
+                    <svg viewBox="0 0 48 48" @click="choose()">
+                        <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
+                    </svg>
                     <p>{{AppData.translations.role_clear}}</p>
                 </div>
                 <div v-for="role in AppData.positions" class="item" :key="role.id" :rid="role.id" @click="choose(role.id)">

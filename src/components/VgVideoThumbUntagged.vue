@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="actions">
-                <img v-if="isSending" class="loader" src="/img/loader.gif" />
+                <img v-if="isSending" class="loader" :src="loader" />
                 <div v-if="isChanged" class="bt save icon" @click="this.saveVideo()">
                     <svg viewBox="0 0 64 64">
                         <path fill="none" stroke="#000000" d="M39,14H16a2.1,2.1,0,0,0-2,2.18V47.82A2.1,2.1,0,0,0,16,50H48a2.1,2.1,0,0,0,2-2.18V24.91Z"/>
@@ -84,6 +84,7 @@ import {mapGetters, mapActions} from 'vuex';
 import axios from 'axios';
 
 export default {
+
     components: {  },
 
     props: { data: Object, type:String, reported: Boolean },
@@ -93,6 +94,7 @@ export default {
         disabled: false,
         isSending: false,
         showingVideo: false,
+        loader: require('@/assets/imgs/loader.gif'),
       }
     },
 

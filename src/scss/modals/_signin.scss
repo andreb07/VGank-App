@@ -108,14 +108,15 @@
 
         .errors {
             color: #ed8989;
-            height: 40px;
+            height: 36px;
             font-size: 12px;
-            width: 100%;
+            width: 105%;
             margin: 4px auto 0 auto;
             position: absolute;
             left: 50%;
             transform: translate(-50%, -76px);
             line-height: 17px;
+            overflow: hidden;
 
             &.register {
                 transform: translate(-50%, 21px);
