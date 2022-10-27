@@ -47,6 +47,7 @@ const store = createStore({
             api: {
                 initialData: api + 'initialdata',
                 getVideos: api + 'getvideos',
+                getspecificvideo: api + 'getspecificvideo',
                 getUntagged: api + 'getuntagged',
                 getReported: api + 'getreported',
                 userLogin: api + 'login',

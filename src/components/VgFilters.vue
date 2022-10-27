@@ -58,8 +58,8 @@
             <div class="reset" v-if="hasFilters" @click="doResetFilters()">{{AppData.translations.filter_reset}}</div>
 
             <section id="vg-loading" class="loading-filter" ref="filter">
-                <img class="logo" src="/img/logo.svg" />
-                <img class="spinner" src="/img/spinner.svg" />
+                <img class="logo" :src="logo" />
+                <img class="spinner" :src="spinner" />
             </section>
         </div>
     </section>
@@ -75,7 +75,9 @@ export default {
     data() {
         return {
             searchTerm:'',
-            hidden: false
+            hidden: false,
+            logo: require('@/assets/imgs/loading_logo.svg'),
+            spinner: require('@/assets/imgs/loading_spinner.svg')
         };
     },
 

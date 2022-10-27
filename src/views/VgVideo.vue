@@ -129,6 +129,12 @@ import { useHead } from "@vueuse/head";
 
 export default {
 
+    data() {
+        return {
+            specificVideo: false
+        };
+    },
+
     components: { VgReported },
 
     created: function() {
@@ -180,6 +186,8 @@ export default {
 
       videodata: function(){
         var _video = false;
+
+        if(this.specificVideo) return this.specificVideo;
 
         this.AppVideos.some((video) => {
             if(video.id == this.$route.params.id) {
@@ -401,7 +409,7 @@ export default {
           gtag('event', 'report_video');
         },
 
-         closeModal: function(){
+        closeModal: function(){
           this.$refs.reported.$el.classList.remove('show');
         },
 
@@ -428,9 +436,19 @@ export default {
     },
 
     watch: {
-      AppVideos() {
-         if(!this.videodata) this.$router.push('/');
-      }
+
+      $route : {
+        async handler(val) {
+          let view = this;
+          
+          if(val.name == 'Video' && !this.videodata) {
+            let vdata = await axios.post(this.AppApi.getspecificvideo, { vid: this.$route.params.id });
+            view.specificVideo = vdata.data;
+          }
+        },
+        deep: true,
+        immediate: true
+      },
     }
 
 }

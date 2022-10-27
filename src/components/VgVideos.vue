@@ -10,8 +10,8 @@
     </div>
 
     <section id="vg-loading">
-      <img class="logo" src="/img/logo.svg" />
-      <img class="spinner" src="/img/spinner.svg" />
+      <img class="logo" :src="logo" />
+      <img class="spinner" :src="spinner" />
     </section>
   </section>
 </template>
@@ -29,7 +29,9 @@ export default {
     data() {
       return {
         disabled: false,
-        cols: 5
+        cols: 5,
+        logo: require('@/assets/imgs/loading_logo.svg'),
+        spinner: require('@/assets/imgs/loading_spinner.svg')
       }
     }, 
 
