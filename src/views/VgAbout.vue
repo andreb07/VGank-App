@@ -1,7 +1,9 @@
 <template>
     <section id="vg-about">
-        <div class="content" v-html="AppData.translations.about_content"></div>
-        <div class="link" @click="$router.push({path: '/privacy'});">VGank Privacy Policy</div>        
+        <div class="content">
+          <div v-html="AppData.translations.about_content"></div>
+          <div class="link" @click="$router.push({path: '/privacy'});">VGank Privacy Policy</div> 
+        </div>
     </section>
 </template>
 

@@ -14,8 +14,10 @@
             </div>         
         </div>    
         <div v-if="AppUser" class="login">
-            <p>VGank Account</p>
-            <p class="name">{{AppUser.user_email}}</p>
+            <p>Logged in</p>
+            <p class="name" v-if="AppUser.display_name">{{AppUser.display_name}}</p>
+            <p class="name" v-else>{{AppUser.user_email}}</p>
+            
             <div class="bt" @click="this.logout()">{{AppData.translations.header_logout}}</div>
         </div>
         <div v-else class="signin">
