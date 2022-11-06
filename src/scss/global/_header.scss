@@ -116,6 +116,15 @@
            
         }
 
+        a {
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+
         svg {
             height: 30px;
 
@@ -203,13 +212,9 @@
             }
 
             .profile {
-                background: $primary-color;
-                color: #000;
-                padding: 5px;
-                border-radius: 50%;
-                font-size: 12px;
-                //margin-right: 20px;
-                cursor: pointer;
+                color: #0abb79;
+                margin-left: 25px;
+                pointer-events: none;
 
                 @media screen and (max-width: 900px) {
                     margin-right: 15px;
@@ -242,6 +247,15 @@
                     }
                 }
             }
+
+            a {
+                margin-right: 25px;
+
+                @media screen and (max-width: 900px) {
+                    margin-right: 15px;
+                }
+
+            }
             
             .left {
                 display: flex;
@@ -265,53 +279,6 @@
                     }                    
                 }
 
-                .manager {
-                    background: $header-bg;
-                    position: absolute;
-                    padding: 20px 20px 5px 20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    top: 19px;
-                    border-radius: 5px;
-                    pointer-events: none;
-                    z-index: 1;
-                    opacity: 0;
-                    pointer-events: none;
-                    top: 10px;
-                    transition: all .3s;
-
-                    .link {
-                        margin:0 0 15px 0;
-                        font-size: 12px;
-                        pointer-events: all;
-                        display: flex;
-                        align-items: center;
-                        line-height: 20px;
-                        
-                        span {
-                            background:#a92121;
-                            border-radius: 3px;
-                            font-size: 11px;
-                            color: $white;
-                            margin-right: 8px;
-                            display: flex;
-                            align-items: center;
-                            padding: 3px;
-                            min-width: 20px;
-
-                            &.green {
-                                background: green;
-                            }
-
-                            p {
-                                margin: 0;
-                                width: 100%;
-                                line-height: 11px;
-                                text-align: center;
-                            }
-                        }
-                    }
-                }
             }
 
             .right {
@@ -327,6 +294,64 @@
 
                     @media screen and (max-width: 900px) {
                         margin-left: 10px;
+                    }
+                }
+
+                .link {
+                    margin-left: 25px;
+                    margin-right: 0;
+    
+                    @media screen and (max-width: 900px) {
+                        margin-left: 15px;
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .manager {
+                background: $header-bg;
+                position: absolute;
+                padding: 20px 20px 5px 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 19px;
+                border-radius: 5px;
+                pointer-events: none;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+                top: 10px;
+                transition: all .3s;
+
+                .link {
+                    margin:0 0 15px 0;
+                    font-size: 12px;
+                    pointer-events: all;
+                    display: flex;
+                    align-items: center;
+                    line-height: 20px;
+                    
+                    span {
+                        background:#a92121;
+                        border-radius: 3px;
+                        font-size: 11px;
+                        color: $white;
+                        margin-right: 8px;
+                        display: flex;
+                        align-items: center;
+                        padding: 3px;
+                        min-width: 20px;
+
+                        &.green {
+                            background: green;
+                        }
+
+                        p {
+                            margin: 0;
+                            width: 100%;
+                            line-height: 11px;
+                            text-align: center;
+                        }
                     }
                 }
             }

@@ -256,6 +256,14 @@
                 opacity: .8;
                 line-height: 22px;
 
+                &.emptyTags {
+                    max-width: 90%;
+
+                    @media all and (max-width: 520px) {
+                        max-width: 80%;
+                    }        
+                }
+
                 @media all and (max-width: 520px) {
                     font-size: 14px;
                 }

@@ -8,6 +8,7 @@
                 <div :class="$route.name == 'Favorites' ? 'link active' : 'link'" @click="openLink('/favorites');">{{AppData.translations.header_favorites}}</div><br />
             </div>
             <div :class="$route.name == 'About' ? 'link active' : 'link'" @click="openLink('/about');">{{AppData.translations.header_about}}</div><br />
+            <a class="item" href="mailto:hello@vgank.net">Contact</a><br />
             <div v-if="AppUser">
                 <div v-if="AppUser.istagger" :class="$route.name == 'Untagged' ? 'link active' : 'link'" @click="openLink('/untagged');"><span class="total" v-if="AppUntagged.length > 0">{{AppUntagged.length}}</span>{{AppData.translations.header_untagged}}</div><br />
                 <div v-if="AppUser.istagger" :class="$route.name == 'reported' ? 'link active' : 'link'" @click="openLink('/reported');"><span class="total" v-if="AppReported.length > 0">{{AppReported.length}}</span>{{AppData.translations.header_reported}}</div><br /> 

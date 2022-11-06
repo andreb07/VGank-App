@@ -29,6 +29,12 @@
         font-size: 12px;
         opacity: .8;
         display: inline-block;
+        margin-top: 50px;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     .content  {

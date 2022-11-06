@@ -16,7 +16,7 @@
             <div class="info" @click="this.$router.push('/video/' + data.id)">
                 <div class="date">{{data.date}}</div>  
                 <div class="channel" v-html="data.channel"></div>
-                <div class="description" v-html="data.description"></div> 
+                <div :class="emptyTags ? 'description' : 'description emptyTags'" v-html="data.description"></div> 
             </div>
 
             <div v-if="videoTags" class="tags">
@@ -194,6 +194,19 @@ export default {
             }
 
             return reported;
+        },
+
+        emptyTags: function(){
+            let notags = false;
+
+            if(this.videoChamps ||
+                this.videoRanks ||
+                this.videoPositions ||
+                this.videoTags) {
+                notags = true;
+            }
+
+            return notags;
         }
     },
 
