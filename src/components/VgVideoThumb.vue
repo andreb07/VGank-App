@@ -1,23 +1,25 @@
 <template>
     <div class="video">
 
-        <div :class="'image-box ' + formateImage"  @click="this.$router.push('/video/' + data.id)">
-            <div v-if="videoseen" class="check">
-                <svg viewBox="0 0 7.5 5.92">
-                    <path d="M7.41,.07c-.1-.1-.25-.1-.35,0L2.41,5.3,.44,3.72c-.1-.1-.26-.1-.36,0-.1,.1-.1,.26,0,.36,.01,.01,.03,.03,.05,.04l2.18,1.72c.1,.09,.25,.09,.35,0L7.43,.44c.09-.11,.08-.27-.02-.36,0,0,0,0,0,0Z"/>
-                </svg>
-            </div>
-            <svg class="play" viewBox="0 0 512 512"><path d="M128,96v320l256-160L128,96L128,96z"/></svg> 
-            <img class="" :src="data.thumb" />
-        </div>    
+        <a :href="'/video/' + data.id">
+            <div :class="'image-box ' + formateImage">
+                <div v-if="videoseen" class="check">
+                    <svg viewBox="0 0 7.5 5.92">
+                        <path d="M7.41,.07c-.1-.1-.25-.1-.35,0L2.41,5.3,.44,3.72c-.1-.1-.26-.1-.36,0-.1,.1-.1,.26,0,.36,.01,.01,.03,.03,.05,.04l2.18,1.72c.1,.09,.25,.09,.35,0L7.43,.44c.09-.11,.08-.27-.02-.36,0,0,0,0,0,0Z"/>
+                    </svg>
+                </div>
+                <svg class="play" viewBox="0 0 512 512"><path d="M128,96v320l256-160L128,96L128,96z"/></svg> 
+                <img class="" :src="data.thumb" />
+            </div>    
+        </a>
 
         <div class="bottom">
 
-            <div class="info" @click="this.$router.push('/video/' + data.id)">
+            <a :href="'/video/' + data.id" class="info">
                 <div class="date">{{data.date}}</div>  
                 <div class="channel" v-html="data.channel"></div>
                 <div :class="emptyTags ? 'description' : 'description emptyTags'" v-html="data.description"></div> 
-            </div>
+            </a>
 
             <div v-if="videoTags" class="tags">
                 <div class="tag" v-for="tag in videoTags" :key="tag.id">{{tag.name}}</div>
