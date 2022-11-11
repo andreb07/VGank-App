@@ -16,8 +16,9 @@
         <div class="bottom">
 
             <a :href="'/video/' + data.id" class="info">
-                <div class="date">{{data.date}}</div>  
-                <div class="channel" v-html="data.channel"></div>
+                <div class="date">{{data.date}}</div> 
+                <div class="channel" v-if="data.channelShort" v-html="data.channelShort"></div>                
+                <div class="channel" v-else v-html="data.channel"></div>
                 <div :class="emptyTags ? 'description' : 'description emptyTags'" v-html="data.description"></div> 
             </a>
 

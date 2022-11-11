@@ -61,9 +61,11 @@
             }
 
             p {
-                max-width: 70px;
+                max-width: 100%;
                 margin: 10px auto 0 auto;
-                line-height: 16px;   
+                line-height: 16px;
+                inline-size: 100%;
+                overflow-wrap: anywhere; 
             }
 
             &:hover {

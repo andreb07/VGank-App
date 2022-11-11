@@ -17,7 +17,8 @@
                 </div>
                 <div v-for="source in AppData.channels" class="item" :key="source.id" @click="choose(source.id)">
                     <img :src="source.image" />
-                    <p v-html="source.name"></p>
+                    <p v-if="source.short_name" v-html="source.short_name"></p>
+                    <p v-else v-html="source.name"></p>
                 </div>
             </div>
         </div>        

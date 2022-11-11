@@ -23,7 +23,8 @@
         
             <div class="info">
                 <div class="date">{{data.date}}</div>  
-                <div class="channel" v-html="data.channel"></div>
+                <div class="channel" v-if="data.channelShort" v-html="data.channelShort"></div>                
+                <div class="channel" v-else v-html="data.channel"></div>
                 <div class="description" v-html="data.description"></div> 
             </div>
             
