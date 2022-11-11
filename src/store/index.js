@@ -29,10 +29,10 @@ const store = createStore({
             },
 
             shareLinks: {
-                whatsapp: 'https://api.whatsapp.com/send/?text=' + siteurl + 'video/',
-                facebook: 'https://www.facebook.com/sharer.php?u=' + siteurl + 'video/',
-                twitter: 'https://twitter.com/share?url='+ siteurl + 'video/', 
-                email: 'mailto:?subject=VGank Video&body=' + siteurl + 'video/',
+                whatsapp: 'https://api.whatsapp.com/send/?text=',
+                facebook: 'https://www.facebook.com/sharer.php?u=',
+                twitter: 'https://twitter.com/share?url=', 
+                email: 'mailto:?subject=VGank Video&body=',
             },
 
             data: {
