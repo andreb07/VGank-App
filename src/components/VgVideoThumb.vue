@@ -30,6 +30,11 @@
                 <div class="filter champion" v-for="champ in videoChamps" :key="champ.id" :style="'background-image:url(' + champ.image + ');'">
                     <label>{{champ.name}}</label>
                 </div>
+
+                <div class="filter champion" v-for="champ in videoChamps2" :key="champ.id" :style="'background-image:url(' + champ.image + ');'">
+                    <label>{{champ.name}}</label>
+                </div>
+
                 <div class="filter rank" v-for="rank in videoRanks" :key="rank.id" :style="'background-image:url(' + rank.image + ');'">
                     <label>{{rank.name}}</label>
                 </div>
@@ -86,6 +91,25 @@ export default {
             if(!this.data.champion) return false;
 
             this.data.champion.some((videochamp) => {
+                self.AppData.champions.some((champ) => {
+                    if(champ.id == videochamp) {
+                        champdata.push({id:champ.id, image:champ.image, name:champ.name});
+                    }
+                });
+            });            
+
+            return champdata;
+        },
+
+        videoChamps2: function(){
+            const self = this;
+            let champdata = [];
+
+            console.log('this.data.champion2', this.data)
+
+            if(!this.data.champion2) return false;
+
+            this.data.champion2.some((videochamp) => {
                 self.AppData.champions.some((champ) => {
                     if(champ.id == videochamp) {
                         champdata.push({id:champ.id, image:champ.image, name:champ.name});

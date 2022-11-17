@@ -20,7 +20,6 @@
                         </div>-->
                         <div :class="this.$route.name == 'Homepage' ? 'link active' : 'link'" @click="$router.push({path: '/'});">{{AppData.translations.header_videos}}</div>
                         <div :class="this.$route.name == 'About' ? 'link active' : 'link'" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
-                        <a class="item" href="mailto:hello@vgank.net">Contact</a>
                     </div>
                 </div>
                 <div v-else>
@@ -29,7 +28,6 @@
                         <div :class="this.$route.name == 'Homepage' ? 'link active' : 'link'" @click="$router.push({path: '/'});">{{AppData.translations.header_videos}}</div>
                         <div :class="this.$route.name == 'Favorites' ? 'link active' : 'link'" @click="$router.push({path: '/favorites'});">{{AppData.translations.header_favorites}}</div>
                         <div :class="this.$route.name == 'About' ? 'link active' : 'link'" @click="$router.push({path: '/about'});">{{AppData.translations.header_about}}</div>
-                        <a class="item" :href="'mailto:' + AppData.translations.header_email">{{AppData.translations.header_contact}}</a>
                     </div>
                 </div>
                 <div class="right">

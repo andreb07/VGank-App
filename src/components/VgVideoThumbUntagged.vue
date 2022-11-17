@@ -40,9 +40,14 @@
                 <div v-if="!videoChamps" class="filter champion empty" @click="$emit('openModal', 'champions', {vid:data.id, vidtype:this.type});">
                     <label>{{AppData.translations.filter_champion}}</label>
                 </div>
-                <div v-else class="filter champion clickable" v-for="champ in videoChamps" :key="champ.id" :style="'background-image:url(' + champ.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
-                    <label>{{champ.name}}</label>
-                </div>
+                <div v-else class="champs">
+                    <div class="filter champion clickable" v-for="champ in videoChamps" :key="champ.id" :style="'background-image:url(' + champ.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
+                        <label>{{champ.name}}</label>
+                    </div>
+                    <div class="filter champion clickable" v-for="champ2 in videoChamps2" :key="champ2.id" :style="'background-image:url(' + champ2.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
+                        <label>{{champ2.name}}</label>
+                    </div>
+                </div>                
 
                 <div v-if="!videoRanks" class="filter rank empty" @click="$emit('openModal', 'ranks', {vid:data.id, vidtype:this.type});">
                     <label>{{AppData.translations.filter_rank}}</label>
@@ -123,6 +128,24 @@ export default {
             if(this.data.champion.length == 0) return false;
 
             this.data.champion.some((videochamp) => {
+                self.AppData.champions.some((champ) => {
+                    if(champ.id == videochamp) {
+                        champdata.push({id:champ.id, image:champ.image, name:champ.name});
+                    }
+                });
+            });            
+
+            return champdata;
+        },
+
+        videoChamps2: function(){
+            const self = this;
+            let champdata = [];
+
+            if(!this.data.champion2) return false;
+            if(this.data.champion2.length == 0) return false;
+
+            this.data.champion2.some((videochamp) => {
                 self.AppData.champions.some((champ) => {
                     if(champ.id == videochamp) {
                         champdata.push({id:champ.id, image:champ.image, name:champ.name});
@@ -270,6 +293,7 @@ export default {
             await axios.post(this.AppApi.updateVideo, { 
                 'vid' : this.data.id,
                 'champions': this.videoChamps,
+                'champion2': this.videoChamps2,
                 'ranks' : this.videoRanks,
                 'positions' : this.videoPositions,
                 'tags' : this.videoTags,
@@ -291,8 +315,10 @@ export default {
             
             if(this.type == 'untagged') {
                 this.removeVideo(this.data.id);
-                 this.isSending = false;
+                this.isSending = false;
             } 
+
+            this.$emit('saveVideo');
         },
 
         showVideo: function(){

@@ -6,9 +6,21 @@
             <div class="main">
                 <div class="filter champion" @click="this.$emit('openModal', 'champions');">
                     <div class="placeholder">
-                        <img v-if="champion" :src="champion.image" />
-                    </div>  
-                    <div v-if="champion" class="label" v-html="champion.name"></div>                 
+                        <div v-if="champion && champion2" class="matchup">
+                            <div class="champholder champ1">
+                                <img :src="champion.image" />
+                            </div>
+                            <div class="champholder champ2">
+                                <img :src="champion2.image" />
+                            </div>                            
+                        </div>  
+                        <div v-else-if="champion">
+                            <img :src="champion.image" />
+                        </div>                        
+                    </div>
+
+                    <div v-if="champion && champion2" class="label" v-html="champion.name + '<br><span>vs ' +  champion2.name +  '</span>'"></div>     
+                    <div v-else-if="champion" class="label" v-html="champion.name"></div>                 
                     <div v-else class="label">{{AppData.translations.filter_champion}}</div>
                 </div>
                 <div class="filter rank" @click="this.$emit('openModal', 'ranks');">
@@ -55,7 +67,7 @@
 
             <div :class="'bt filter ' + activeFilters" ref="btfilter" @click="doFilters()">{{AppData.translations.filter_button}}</div>
             <div class="bt show" @click="showFilters()">Filter</div>
-            <div class="reset" v-if="hasFilters" @click="doResetFilters()">{{AppData.translations.filter_reset}}</div>
+            <div class="reset" v-if="hasFilters || AppVideos.length == 0" @click="doResetFilters()">{{AppData.translations.filter_reset}}</div>
 
             <section id="vg-loading" class="loading-filter" ref="filter">
                 <img class="logo" :src="logo" />
@@ -82,12 +94,22 @@ export default {
     },
 
     computed: {
-        ...mapGetters(['AppFilters', 'AppData', 'AppQuery', 'AppApi']),
+        ...mapGetters(['AppFilters', 'AppData', 'AppQuery', 'AppApi', 'AppVideos']),
 
         champion: function() {
             let _champ = false;
             this.AppData.champions.some((champ) => {
                 if(champ.id == this.AppFilters.champion) {
+                    _champ = champ;
+                }
+            });
+            return _champ;
+        },
+
+        champion2: function() {
+            let _champ = false;
+            this.AppData.champions.some((champ) => {
+                if(champ.id == this.AppFilters.champion2) {
                     _champ = champ;
                 }
             });
