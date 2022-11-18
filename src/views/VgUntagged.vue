@@ -1,6 +1,6 @@
 <template>
   <section id="vg-untagged">    
-    <vg-videos ref="videolist" type="untagged" @openModal="openModal"></vg-videos>
+    <vg-videos ref="videolist" type="untagged" @openModal="openModal" @saveVideo="saveVideo"></vg-videos>
   </section>
 </template>
 
@@ -13,6 +13,10 @@ export default {
   methods: {
     openModal: function(type, vid) {
       this.$emit('openModal', type, vid);
+    },
+
+    saveVideo:function(){
+      this.$emit('saveVideo');
     }
   }
 };

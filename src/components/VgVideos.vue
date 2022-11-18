@@ -6,7 +6,7 @@
        <vg-video-thumb @openModal="openModal" v-for="item in this.videos" :key="item.id" :data="item" :class="$route.params.id == item.id ? 'hide' : ''"></vg-video-thumb>
     </div>
     <div v-else>
-      <vg-video-thumb-untagged @openModal="openModal" v-for="item in this.videos" :key="item.id" :data="item" :type="'untagged'"></vg-video-thumb-untagged>
+      <vg-video-thumb-untagged @openModal="openModal" @saveVideo="saveVideo" v-for="item in this.videos" :key="item.id" :data="item" :type="'untagged'"></vg-video-thumb-untagged>
     </div>
 
     <section id="vg-loading">
@@ -54,8 +54,11 @@ export default {
       },
 
       openModal: function(type, data) {
-        console.log('VG VIDEOS', type, data);
         this.$emit('openModal', type, data);
+      },
+
+      saveVideo: function() {
+        this.$emit('saveVideo');
       }
 
     }

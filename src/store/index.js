@@ -20,6 +20,7 @@ const store = createStore({
                 total: null,
                 filters: {
                     champion:null,
+                    champion2:null,
                     rank:null,
                     position:null,
                     channel: null,
@@ -64,6 +65,7 @@ const store = createStore({
            
             filters: {
                 champion: null,
+                champion2:null,
                 rank: null,
                 position:null,
                 channel: null,
@@ -196,8 +198,7 @@ const store = createStore({
         },
 
         setVideoList(state, props) {
-            //console.log('##### SET VIDEO LIST');
-            //console.log(props);
+            console.log('##### SET VIDEO LIST');
             state.videos = props.data.videos;
             state.query.total = props.data.totalpages;
         },
@@ -270,6 +271,8 @@ const store = createStore({
                 break;
                 case 'champions': state.filters.champion = data.val;
                     break;
+                case 'champion2': state.filters.champion2 = data.val;
+                    break;
                 case 'ranks': state.filters.rank = data.val;
                     break;
                 case 'positions': state.filters.position = data.val;
@@ -285,6 +288,7 @@ const store = createStore({
 
         resetFilters(state) {
             state.filters.champion = null;
+            state.filters.champion2 = null;
             state.filters.rank = null;
             state.filters.position = null;
             state.filters.channel = null;
@@ -327,8 +331,12 @@ const store = createStore({
         },
 
         updateVideo: function(state, data) {
-            state.data.videos.some((video) => {  
-                if(video.id == data.vid) {
+
+            var videos = state.videos;
+            if(data.list == 'untagged') videos = state.untagged;   
+            
+            videos.some((video) => {  
+                if(video.id == data.vid) {                  
                     video[data.type] = data.val;
                 }
             });
@@ -386,6 +394,22 @@ const store = createStore({
                                 } 
                             });
                             if(!exists) video.champion.push(data.value);                             
+                        break;
+                        case 'champion2':
+                            if(!video.champion2) video.champion2 = [];                            
+                            
+                            if(!data.value)  {
+                                video.champion2 = []; 
+                                return;
+                            }
+
+                            video.champion2.some((champ, idx) => {
+                                if(champ == data.value) {
+                                   exists = true;
+                                   video.champion2.splice(idx, 1);
+                                } 
+                            });
+                            if(!exists) video.champion2.push(data.value);                             
                         break;
                         case 'ranks':
                             if(!video.rank) video.rank = [];

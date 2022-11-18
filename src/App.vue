@@ -5,7 +5,7 @@
   <section id="vg-view">
     <vg-filters ref="filters" @openModal="openModal" @closeFilters="closeFilters"></vg-filters>
     <router-view name="video"></router-view>
-    <router-view name="main" @openModal="openModal"></router-view>
+    <router-view name="main" @openModal="openModal" @saveVideo="saveVideo"></router-view>
   </section>
   <vg-champions ref="champions" @closeModal="closeModal"></vg-champions>
   <vg-ranks ref="ranks" @closeModal="closeModal"></vg-ranks>
@@ -83,7 +83,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fecthInitialData', 'getUserData', 'setFavoritesList', 'updatePage', 'addVideos', 'setUntaggedList', 'changeEditingModal', 'setReportedList', 'getReportedVideos', 'addReportedVideo']),
+    ...mapActions(['fecthInitialData', 'getUserData', 'setFavoritesList', 'updatePage', 'addVideos', 'setUntaggedList', 'changeEditingModal', 'setReportedList', 'getReportedVideos', 'addReportedVideo', 'updateFilters']),
 
     configViews: async function(view){
 
@@ -237,6 +237,7 @@ export default {
 
     openModal: function(type, data){
       console.log('OPEN MODAL FROM APP', type, data);
+
       let modal = this.$refs[type].$el;
       this.currentModal = modal;
       modal.classList.add('show');
@@ -284,10 +285,28 @@ export default {
 
           switch(type) {
             case 'champions':
-              if(video.champion) {
+
+              if(video.champion && video.champion2) {
+                this.$refs.champions.isMatchup = true;
+                this.updateFilters({type:'champions', val:video.champion});
+                this.updateFilters({type:'champion2', val:video.champion2});
+                this.changeEditingModal(true);
+
+                video.champion.some((champId) => {
+                  let item = document.querySelector("[cid='"+champId+"']");
+                  if(item) item.classList.add('selected');
+                });
+
+                video.champion2.some((champId) => {
+                  let item = document.querySelector("[cid='"+champId+"']");
+                  if(item) item.classList.add('selected');
+                });
+
+              } else if(video.champion) {
                 if(video.champion.length > 0) {
-                  self.changeEditingModal(true);
+                  this.changeEditingModal(true);                  
                   video.champion.some((champId) => {
+                    self.updateFilters({type:'champions', val:champId});
                     let item = document.querySelector("[cid='"+champId+"']");
                     if(item) item.classList.add('selected');
                   });
@@ -385,6 +404,12 @@ export default {
           document.body.classList.remove('hidescroll');
         }
       }
+    },
+
+    saveVideo: function(){
+      this.$refs.champions.isMatchup = false;
+      this.updateFilters({type:'champions', val:''});
+      this.updateFilters({type:'champion2', val:''});
     }
   },
 

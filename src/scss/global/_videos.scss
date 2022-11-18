@@ -338,6 +338,12 @@
             @media all and (max-width: 520px) {
                 padding: 0 15px;
             }
+
+            .champs {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+            }
             
             .filter {
                 width: 45px;
