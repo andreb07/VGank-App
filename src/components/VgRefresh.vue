@@ -34,7 +34,8 @@ export default {
             sStop: { x:0,y:0 },
             sScrollSize: 80,
             sSmoother: 2,
-            isRefreshing: false
+            isRefreshing: false,
+            stopRefresh: false
         };
     },
 
@@ -76,7 +77,7 @@ export default {
         },
 
         onSwipeStart: function(e){     
-            if(this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage') return;
+            if(this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage' || this.stopRefresh) return;
 
             let vgvideos = document.getElementById('vg-videos');
             
@@ -96,7 +97,7 @@ export default {
         },
 
         onSwipeEnd: function(e){
-           if(!this.sEnabled || this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage') return;
+           if(!this.sEnabled || this.isRefreshing || window.innerWidth > 520 || this.$route.name != 'Homepage' || this.stopRefresh) return;
 
             let changedTouches = e.changedTouches[0];
             if(changedTouches) {
@@ -123,7 +124,7 @@ export default {
         },
 
         refresh: async function(){
-            if(this.isRefreshing) return;
+            if(this.isRefreshing || this.stopRefresh) return;
             this.isRefreshing = true;
 
             document.body.classList.add('locked');

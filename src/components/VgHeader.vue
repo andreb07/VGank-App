@@ -144,8 +144,8 @@ export default {
        ...mapActions(['setCurrentUser', 'changeListType']),
 
         openMenu: function(){
-            this.$emit('openMenu');
             this.$emit('closeFilters');
+            this.$emit('openMenu');           
             document.body.classList.add('hidescroll');
         },
 

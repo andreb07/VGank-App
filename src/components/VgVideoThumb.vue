@@ -105,8 +105,6 @@ export default {
             const self = this;
             let champdata = [];
 
-            console.log('this.data.champion2', this.data)
-
             if(!this.data.champion2) return false;
 
             this.data.champion2.some((videochamp) => {

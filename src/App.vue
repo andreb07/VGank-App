@@ -14,7 +14,7 @@
   <vg-tags ref="tags" @closeModal="closeModal"></vg-tags>
   <vg-signin ref="signin" @closeModal="closeModal"></vg-signin>
   <vg-reported ref="reported" @closeModal="closeModal"></vg-reported>
-  <vg-refresh v-if="this.$route.name == 'Homepage'"></vg-refresh>
+  <vg-refresh ref="refresh" v-if="this.$route.name == 'Homepage'"></vg-refresh>
   <vg-cookies></vg-cookies>
 </template>
 
@@ -238,6 +238,7 @@ export default {
     openModal: function(type, data){
       console.log('OPEN MODAL FROM APP', type, data);
 
+      this.$refs.refresh.stopRefresh = true;
       let modal = this.$refs[type].$el;
       this.currentModal = modal;
       modal.classList.add('show');
@@ -260,6 +261,7 @@ export default {
 
     closeModal: function(){
       console.log('CLOSING MODAL');
+      this.$refs.refresh.stopRefresh = false;
       this.currentModal.classList.remove('show');
       this.currentModal.removeAttribute('vid');
       this.changeEditingModal(false);
@@ -356,6 +358,7 @@ export default {
     },
 
     openMenu: function(){
+      this.$refs.refresh.stopRefresh = true;
       this.$refs.menu.$el.classList.add('open');
       this.$refs.header.$el.classList.add('menuopen');
     },
@@ -363,6 +366,7 @@ export default {
     openFilters: function(){
       let filters = this.$refs.filters.$el;
       let videolist = document.getElementById('vg-videos');
+      this.$refs.refresh.stopRefresh = true;
 
       if(filters.classList.contains('open')) {
         filters.classList.remove('open');
@@ -385,9 +389,11 @@ export default {
       this.$refs.champions.isMatchup = false;
       this.updateFilters({type:'champions', val:''});
       this.updateFilters({type:'champion2', val:''});
+      this.$refs.refresh.stopRefresh = false;
     },
 
     closeMenu: function(){
+      this.$refs.refresh.stopRefresh = false;
       this.$refs.menu.$el.classList.remove('open');
       this.$refs.header.$el.classList.remove('menuopen');
       document.body.classList.remove('hidescroll');
