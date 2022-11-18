@@ -17,10 +17,10 @@
                         </svg>
                         <p>{{AppData.translations.champion_search}}</p>
                     </div>
-                    <input type="text" v-model="searchTerm" @focus="onSearchFocus()" @blur="onSearchBlur($event)" />
+                    <input type="text" ref="searchInput" :value="searchTerm" @input="e => searchTerm = e.target.value" @focus="onSearchFocus()" @blur="onSearchBlur($event)" />
                 </div>
 
-                <div v-if="!isMatchup" class="bt create" @click="toggleMatchup()">Create a matchup</div>
+                <div v-if="!isMatchup" class="bt create" @click="toggleMatchup()">{{AppData.translations.champion_mu_btn}}</div>
     
                 <div v-if="isMatchup" class="matchup">
                     <div class="match">
@@ -28,20 +28,20 @@
                             <div class="placeholder">
                                 <img v-if="champion1" :src="champion1.image" />
                             </div>
-                            <div class="label">Champion</div>
+                            <div class="label">{{AppData.translations.champion_mu_champlabel}}</div>
                         </div>
                         <div class="vs">VS</div>
                         <div class="champ">
                             <div class="placeholder">
                                 <img v-if="champion2" :src="champion2.image" />
                             </div>
-                            <div class="label">Champion</div>
+                            <div class="label">{{AppData.translations.champion_mu_champlabel}}</div>
                         </div>
                     </div>
 
                     <div class="bts">
-                        <div :class="AppFilters.champion2 ? 'bt select show' : 'bt select'" @click="selectMatchup()">Select</div>
-                        <div class="bt" @click="toggleMatchup()">Reset</div>
+                        <div :class="AppFilters.champion2 ? 'bt select show' : 'bt select'" @click="selectMatchup()">{{AppData.translations.champion_mu_select}}</div>
+                        <div class="bt" @click="toggleMatchup()">{{AppData.translations.champion_mu_reset}}</div>
                     </div>
                     
                 </div>                

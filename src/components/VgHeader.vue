@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="link" v-if="AppUser" @click="this.logout()">Logout</div>
+                    <div class="link" v-if="AppUser" @click="this.logout()">{{AppData.translations.header_logout}}</div>
 
                     <div class="profile" v-if="AppUser">
                         <span v-if="AppUser.display_name">{{AppUser.display_name}}</span>

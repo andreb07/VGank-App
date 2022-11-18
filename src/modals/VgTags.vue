@@ -7,10 +7,10 @@
                     <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
                 </svg>
             </div>
-            <h2>Select a tag</h2>
+            <h2>{{AppData.translations.tags_title}}</h2>
             <div class="list">
                 <div :class="'item blank ' + showClear"  @click="choose()">
-                    <p>None</p>
+                    <p>{{AppData.translations.tags_clear}}</p>
                 </div>
                 <div v-for="tag in AppData.tags" class="item" :key="tag.id" :tid="tag.id" @click="choose(tag.id)">
                     <p v-html="tag.name"></p>

@@ -66,7 +66,7 @@
             </div>
 
             <div :class="'bt filter ' + activeFilters" ref="btfilter" @click="doFilters()">{{AppData.translations.filter_button}}</div>
-            <div class="bt show" @click="showFilters()">Filter</div>
+            <div class="bt show" @click="showFilters()">{{AppData.translations.filter_btnsilters}}</div>
             <div class="reset" v-if="hasFilters || AppVideos.length == 0" @click="doResetFilters()">{{AppData.translations.filter_reset}}</div>
 
             <section id="vg-loading" class="loading-filter" ref="filter">

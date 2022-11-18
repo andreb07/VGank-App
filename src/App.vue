@@ -382,6 +382,9 @@ export default {
       filters.classList.remove('open');
       if(videolist) videolist.classList.remove('hasfilters');     
       document.body.classList.remove('hidescroll');
+      this.$refs.champions.isMatchup = false;
+      this.updateFilters({type:'champions', val:''});
+      this.updateFilters({type:'champion2', val:''});
     },
 
     closeMenu: function(){
