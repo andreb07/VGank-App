@@ -5,7 +5,7 @@
   <section id="vg-view">
     <vg-filters ref="filters" @openModal="openModal" @closeFilters="closeFilters"></vg-filters>
     <router-view name="video"></router-view>
-    <router-view name="main" @openModal="openModal" @saveVideo="saveVideo"></router-view>
+    <router-view name="main" @openModal="openModal" @saveVideo="saveVideo" @resetVideos="resetVideos"></router-view>
   </section>
   <vg-champions ref="champions" @closeModal="closeModal"></vg-champions>
   <vg-ranks ref="ranks" @closeModal="closeModal"></vg-ranks>
@@ -379,16 +379,20 @@ export default {
       }      
     },
 
-    closeFilters: function(){
+    closeFilters: function(noclean){
       let filters = this.$refs.filters.$el;
       let videolist = document.getElementById('vg-videos');
       this.$refs.header.$el.classList.remove('filtersopen');
       filters.classList.remove('open');
       if(videolist) videolist.classList.remove('hasfilters');     
       document.body.classList.remove('hidescroll');
-      this.$refs.champions.isMatchup = false;
-      this.updateFilters({type:'champions', val:''});
-      this.updateFilters({type:'champion2', val:''});
+
+      if(!noclean) {
+        this.$refs.champions.isMatchup = false;
+        this.updateFilters({type:'champions', val:''});
+        this.updateFilters({type:'champion2', val:''});
+      }
+      
       if(this.$refs.refresh) this.$refs.refresh.stopRefresh = false;
     },
 
@@ -419,6 +423,10 @@ export default {
       this.$refs.champions.isMatchup = false;
       this.updateFilters({type:'champions', val:''});
       this.updateFilters({type:'champion2', val:''});
+    },
+
+    resetVideos: function() {
+      this.$refs.filters.doResetFilters();
     }
   },
 

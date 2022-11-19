@@ -221,7 +221,7 @@ export default {
 
             this.filtering = false;
             this.$refs.filter.classList.remove('show');
-            this.$emit('closeFilters');
+            this.$emit('closeFilters', true);
             document.getElementById('vg-videos').classList.remove('block');
 
             // eslint-disable-next-line

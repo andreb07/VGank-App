@@ -1,7 +1,10 @@
 <template>
   <section v-if="this.videos" id="vg-videos">
-    <div class="no-videos" v-if="this.videos.length == 0" v-html="AppData.translations.filter_empty"></div>
-
+    <div class="no-videos" v-if="this.videos.length == 0">
+      <div v-html="AppData.translations.filter_empty"></div>
+      or <div class="bt" v-if="this.videos.length == 0" @click="resetVideos">Reset</div>
+    </div>
+    
     <div v-if="this.type == 'tagged'">
        <vg-video-thumb @openModal="openModal" v-for="item in this.videos" :key="item.id" :data="item" :class="$route.params.id == item.id ? 'hide' : ''"></vg-video-thumb>
     </div>
@@ -33,7 +36,7 @@ export default {
         logo: require('@/assets/imgs/loading_logo.svg'),
         spinner: require('@/assets/imgs/loading_spinner.svg')
       }
-    }, 
+    },
 
     computed: {
         ...mapGetters(['AppVideos', 'AppUntagged', 'AppReported', 'AppData']),
@@ -48,6 +51,11 @@ export default {
     },
 
     methods: {
+
+      resetVideos: function(){
+        console.log('VgVideos resetVideos');
+        this.$emit('resetVideos');
+      },  
 
       openVideo: function(vid){
         this.$router.push({path: '/video/' + vid});
