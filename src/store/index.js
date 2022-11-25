@@ -257,8 +257,8 @@ const store = createStore({
 
         updateFilters(state, data) {
 
-            //console.log('##### UPDATE FILTERS');
-            //console.log(data);
+            console.log('##### UPDATE FILTERS');
+            console.log(data);
 
             switch(data.type) {
                 case 'mainChamp':
@@ -271,7 +271,9 @@ const store = createStore({
                 break;
                 case 'champions': state.filters.champion = data.val;
                     break;
-                case 'champion2': state.filters.champion2 = data.val;
+                case 'champion2': 
+                        state.filters.champion2 = data.val;
+                        console.log('state.filters.champion2', state.filters.champion2);
                     break;
                 case 'ranks': state.filters.rank = data.val;
                     break;
@@ -332,22 +334,45 @@ const store = createStore({
 
         updateVideo: function(state, data) {
 
+            console.log('UPDATE VIDEO', data);
+
             var videos = state.videos;
             if(data.list == 'untagged') videos = state.untagged;   
+            if(data.list == 'reported') videos = state.reported;   
             
             videos.some((video) => {  
-                if(video.id == data.vid) {                  
+                if(video.id == data.vid) {      
+                    console.log('video[data.type]', video[data.type]);            
                     video[data.type] = data.val;
                 }
             });
         },
 
         removeVideo: function(state, data) {
-            state.untagged.some((video, idx) => {  
-                if(video.id == data) {
-                    state.untagged.splice(idx, 1);
-                }
-            });
+
+            console.log('REMOVE VIDEO', data);
+
+            if(data.route == 'Untagged') {
+                state.untagged.some((video, idx) => {  
+                    if(video.id == data.vid) {
+                        state.untagged.splice(idx, 1);
+                    }
+                });
+            }
+
+            if(data.route == 'Reported') {
+                state.reported.some((video, idx) => {  
+                    if(video.id == data.vid) {
+                        state.reported.splice(idx, 1);
+                    }
+                });
+
+                state.videos.some((video, idx) => {  
+                    if(video.id == data.vid) {
+                        state.videos.splice(idx, 1);
+                    }
+                });
+            }
         },
 
         removeReportedVideo: function(state, data) {
@@ -359,6 +384,7 @@ const store = createStore({
         },
 
         addReportedVideo: function(state, data) {
+            console.log('addReportedVideo', data);
             state.reported.push(data);
         },
 
@@ -372,6 +398,7 @@ const store = createStore({
             var videolist = null;
             if(data.vidtype == 'untagged') videolist = state.untagged;
             if(data.vidtype == 'tagged') videolist = state.videos;
+            if(data.route == 'Reported') videolist = state.reported;
 
             if(!videolist) return;
 
@@ -395,21 +422,13 @@ const store = createStore({
                             });
                             if(!exists) video.champion.push(data.value);                             
                         break;
-                        case 'champion2':
-                            if(!video.champion2) video.champion2 = [];                            
-                            
+                        case 'champion2':                           
                             if(!data.value)  {
-                                video.champion2 = []; 
+                                video.champion2 = null; 
                                 return;
                             }
 
-                            video.champion2.some((champ, idx) => {
-                                if(champ == data.value) {
-                                   exists = true;
-                                   video.champion2.splice(idx, 1);
-                                } 
-                            });
-                            if(!exists) video.champion2.push(data.value);                             
+                            if(!exists) video.champion2 = data.value;                          
                         break;
                         case 'ranks':
                             if(!video.rank) video.rank = [];

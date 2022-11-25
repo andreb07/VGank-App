@@ -7,6 +7,10 @@
     width: 100%;
     z-index: 50000;
 
+    &.inactive {
+        pointer-events: none;
+    }
+
     @media screen and (max-width: 640px) {
         z-index: 20000;
     }
@@ -24,6 +28,7 @@
         top:0;
         opacity: .95;
         display: none;
+        pointer-events: none;
     }
 
     @media screen and (max-width: 723px) {

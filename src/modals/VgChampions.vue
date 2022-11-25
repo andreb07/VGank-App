@@ -48,7 +48,7 @@
               
             </div>      
 
-            <div class="list">
+            <div class="list" ref="list">
                 <div :class="'item blank ' + showClear" @click="choose()">
                     <svg viewBox="0 0 48 48">
                         <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
@@ -125,6 +125,10 @@ export default {
 
             if(this.isMatchup) {
 
+                let vid = this.$refs.modal.getAttribute('vid'); 
+                let vidtype = this.$refs.modal.getAttribute('vidtype'); 
+
+
                 if(!cid) {
                     let type = '';
                     if(this.AppFilters.champion2) {
@@ -133,10 +137,12 @@ export default {
                         type = 'champions';
                     }
                     this.updateFilters({type:type, val:cid});
-                } else {
 
-                    let vid = this.$refs.modal.getAttribute('vid'); 
-                    let vidtype = this.$refs.modal.getAttribute('vidtype'); 
+                    if(vid) {
+                        this.setUntaggedVideoInfo({vid:parseInt(vid), vidtype:vidtype, type:type, value: cid, route:this.$route.name});
+                    }
+                    
+                } else {                    
 
                     if(!vid) {
                         if(!this.AppFilters.champion) {
@@ -154,7 +160,7 @@ export default {
                         }
 
                         this.updateFilters({type:field, val:cid});
-                        this.setUntaggedVideoInfo({vid:parseInt(vid), vidtype:vidtype, type:field, value: cid});
+                        this.setUntaggedVideoInfo({vid:parseInt(vid), vidtype:vidtype, type:field, value: cid, route:this.$route.name});
                     }
 
                     this.searchTerm = '';
@@ -162,15 +168,15 @@ export default {
                 }               
                 
             } else {
+
                 let vid = this.$refs.modal.getAttribute('vid'); 
                 let vidtype = this.$refs.modal.getAttribute('vidtype');    
                 
                 if(vid) {
-                    this.setUntaggedVideoInfo({vid:parseInt(vid), vidtype:vidtype, type:'champions', value: cid});
-                } else {                    
-                    this.updateFilters({type:'champions', val:cid});
-                }
+                    this.setUntaggedVideoInfo({vid:parseInt(vid), vidtype:vidtype, type:'champions', value: cid, route:this.$route.name});
+                } 
                 
+                this.updateFilters({type:'champions', val:cid});
                 this.searchTerm = '';
                 this.$emit('closeModal');
             }
@@ -205,6 +211,11 @@ export default {
                 this.isMatchup = false;
                 this.updateFilters({type:'champions', val:''});
                 this.updateFilters({type:'champion2', val:''});
+
+                let selected = document.querySelectorAll("#vg-champions .item.selected");
+                selected.forEach(el => {
+                    el.classList.remove('selected');
+                })
                 
                 if(this.AppEditingModal) {
                     this.updateVideo({type:'champion', val:'', list:'untagged', vid:vid});

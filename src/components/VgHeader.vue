@@ -40,9 +40,9 @@
                         <p>{{AppData.translations.header_sign_in}}</p>    
                     </div>                    
 
-                    <div v-if="AppUser && AppUser.istagger" :class="this.$route.name == 'Untagged' || this.$route.name == 'Reported' ? 'link submenu active' : 'link submenu'">
+                    <div v-if="AppUser && AppUser.istagger" :class="this.$route.name == 'Untagged' || this.$route.name == 'Reported' ? 'link submenu active' : 'link submenu'" @mouseover="toggleFiltersPointers(false)">
                         {{AppData.translations.header_manager}}
-                        <div class="manager">
+                        <div @mouseleave="toggleFiltersPointers(true)" class="manager">
                             <div @click="$router.push({path: '/untagged'});" :class="this.$route.name == 'Untagged' ? 'link active' : 'link'">
                                 <span class="total" v-if="this.AppUntagged.length > 0"><p>{{this.AppUntagged.length}}</p></span>
                                 <span class="total green" v-else><p>0</p></span>
@@ -163,6 +163,16 @@ export default {
             await Storage.remove({ key: 'currentuser' });
             this.setCurrentUser(null);
             this.$router.replace('/');
+        },
+
+        toggleFiltersPointers: function(active){
+            console.log('toggleFiltersPointer', active);
+            if(!active) {
+                document.getElementById('vg-filters').classList.add('inactive');
+            } else {
+                document.getElementById('vg-filters').classList.remove('inactive');
+            }
+            
         }
 
     },

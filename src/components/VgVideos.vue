@@ -2,7 +2,9 @@
   <section v-if="this.videos" id="vg-videos">
     <div class="no-videos" v-if="this.videos.length == 0">
       <div v-html="AppData.translations.filter_empty"></div>
-      or <div class="bt" v-if="this.videos.length == 0" @click="resetVideos">Reset</div>
+      <div v-if="$route.name == 'Homepage'">
+        or <div class="bt" v-if="this.videos.length == 0" @click="resetVideos">Reset</div>
+      </div>
     </div>
     
     <div v-if="this.type == 'tagged'">
@@ -45,6 +47,7 @@ export default {
           let vids = this.AppVideos;
           if(this.type == 'untagged') vids = this.AppUntagged;
           if(this.type == 'reported') vids = this.AppReported;
+
           
           return vids;
         }

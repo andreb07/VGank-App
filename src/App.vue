@@ -79,7 +79,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['AppLoaded', 'AppUser', 'AppApi', 'AppQuery', 'AppVideos', 'AppUntagged', 'AppData', 'AppUrl']),
+    ...mapGetters(['AppLoaded', 'AppUser', 'AppApi', 'AppQuery', 'AppVideos', 'AppUntagged', 'AppData', 'AppUrl', 'AppReported']),
   },
 
   methods: {
@@ -236,7 +236,7 @@ export default {
     },
 
     openModal: function(type, data){
-      console.log('OPEN MODAL FROM APP', type, data);
+      
 
       if(this.$refs.refresh) this.$refs.refresh.stopRefresh = true;
       let modal = this.$refs[type].$el;
@@ -269,6 +269,8 @@ export default {
 
     configModal: function(modal, vid, vidtype, type) {
 
+      console.log('CONFIG MODAL', vid, vidtype, type);
+
       modal.setAttribute('vid', vid);
       modal.setAttribute('vidtype', vidtype);
 
@@ -280,7 +282,11 @@ export default {
         break;
         case 'untagged': videos = this.AppUntagged;
         break;
-      }      
+      }
+      
+      if(this.$route.name == 'Reported') {
+        videos = this.AppReported;
+      }
 
       videos.some((video) => {
         if(video.id == vid) {
@@ -294,7 +300,7 @@ export default {
                 this.updateFilters({type:'champion2', val:video.champion2});
                 this.changeEditingModal(true);
 
-                video.champion.some((champId) => {
+                /*video.champion.some((champId) => {
                   let item = document.querySelector("[cid='"+champId+"']");
                   if(item) item.classList.add('selected');
                 });
@@ -302,15 +308,15 @@ export default {
                 video.champion2.some((champId) => {
                   let item = document.querySelector("[cid='"+champId+"']");
                   if(item) item.classList.add('selected');
-                });
+                });*/
 
               } else if(video.champion) {
                 if(video.champion.length > 0) {
                   this.changeEditingModal(true);                  
                   video.champion.some((champId) => {
                     self.updateFilters({type:'champions', val:champId});
-                    let item = document.querySelector("[cid='"+champId+"']");
-                    if(item) item.classList.add('selected');
+                    /*let item = document.querySelector("[cid='"+champId+"']");
+                    if(item) item.classList.add('selected');*/
                   });
                 }            
               }
@@ -341,6 +347,7 @@ export default {
             break;
 
             case 'tags':
+              console.log('video.tags', video.tags)
               if(video.tags) {
                 if(video.tags.length > 0) {
                   self.changeEditingModal(true);
@@ -420,6 +427,7 @@ export default {
     },
 
     saveVideo: function(){
+      console.log('APP SAVE VIDEO');
       this.$refs.champions.isMatchup = false;
       this.updateFilters({type:'champions', val:''});
       this.updateFilters({type:'champion2', val:''});

@@ -236,7 +236,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(['updateFilters', 'updateUserFavs', 'addVideoToEdit']),
+        ...mapActions(['updateFilters', 'updateUserFavs', 'addVideoToEdit', 'updateVideo']),
 
         bookmarkVideo: async function() {
 
@@ -270,8 +270,9 @@ export default {
                 vid: this.data.id,
                 uid: this.AppUser.ID
             });
-
+            
             this.$emit('openModal', 'reported', {reportedType:response.data.status, vid:this.data});
+            this.updateVideo({list:'reported', type:'reportedId', val:response.data.msg, vid:this.data.id});
         }
       
     }

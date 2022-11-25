@@ -44,8 +44,8 @@
                     <div class="filter champion clickable" v-for="champ in videoChamps" :key="champ.id" :style="'background-image:url(' + champ.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
                         <label>{{champ.name}}</label>
                     </div>
-                    <div class="filter champion clickable" v-for="champ2 in videoChamps2" :key="champ2.id" :style="'background-image:url(' + champ2.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
-                        <label>{{champ2.name}}</label>
+                    <div v-if="videoChamps2" class="filter champion clickable" :style="'background-image:url(' + videoChamps2.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
+                        <label>{{videoChamps2.name}}</label>
                     </div>
                 </div>                
 
@@ -72,7 +72,7 @@
                         <rect fill="none" stroke="#000000" height="19" width="24" x="19" y="31"/>
                     </svg>
                 </div>            
-                <div v-if="!reported" class="bt delete icon" @click="this.openPopup()">
+                <div class="bt delete icon" @click="this.openPopup()">
                    <svg viewBox="0 0 512 512">
                         <path d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z"/>
                         <rect height="241" width="14" x="249" y="160"/>
@@ -131,6 +131,7 @@ export default {
                 self.AppData.champions.some((champ) => {
                     if(champ.id == videochamp) {
                         champdata.push({id:champ.id, image:champ.image, name:champ.name});
+                       
                     }
                 });
             });            
@@ -140,18 +141,17 @@ export default {
 
         videoChamps2: function(){
             const self = this;
-            let champdata = [];
+            let champdata;
 
             if(!this.data.champion2) return false;
-            if(this.data.champion2.length == 0) return false;
 
-            this.data.champion2.some((videochamp) => {
-                self.AppData.champions.some((champ) => {
-                    if(champ.id == videochamp) {
-                        champdata.push({id:champ.id, image:champ.image, name:champ.name});
-                    }
-                });
-            });            
+            self.AppData.champions.some((champ) => {
+                if(champ.id == this.data.champion2) {
+                    champdata = {id:champ.id, image:champ.image, name:champ.name};
+                }
+            });     
+            
+            console.log('videoChamps2', this.data.champion2);
 
             return champdata;
         },
@@ -276,12 +276,18 @@ export default {
         },
 
         delete: async function(){
+
             if(this.disabled) return;
             this.disabled = true;
 
-            await axios.post(this.AppApi.deleteVideo, { vid: this.data.id});
-            this.removeVideo(this.data.id);
+            if(this.$route.name == 'Reported') {
+                await axios.post(this.AppApi.removeReported, {vid : this.data.reportedId});
+                await axios.post(this.AppApi.deleteVideo, { vid: this.data.id});
+            } else {
+                await axios.post(this.AppApi.deleteVideo, { vid: this.data.id});
+            }
 
+            this.removeVideo({vid:this.data.id, route:this.$route.name});
             this.disabled = false;
         },
 
@@ -299,10 +305,12 @@ export default {
                 'tags' : this.videoTags,
                 'uid': this.AppUser.ID
             });
+            
 
             if(this.type == 'tagged') {
 
-                if(this.reported) {
+                if(this.$route.name == "Reported") {
+                    console.log('REMOCE REPORTED', this.data.reportedId);
                     await axios.post(this.AppApi.removeReported, {'vid' : this.data.reportedId});
                     this.removeReportedVideo(this.data.id);
                     this.isSending = false;
@@ -314,7 +322,7 @@ export default {
             }
             
             if(this.type == 'untagged') {
-                this.removeVideo(this.data.id);
+                this.removeVideo({vid:this.data.id, route: 'Untagged'});
                 this.isSending = false;
             } 
 
