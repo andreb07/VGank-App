@@ -39,7 +39,6 @@ export default {
         init: async function(){
 
             const vganksplash = await Storage.get({ key: 'vganksplash' });
-            console.log('vganksplash',vganksplash);
             if(!this.AppData.translations.splash_active || this.$isMobile() || vganksplash.value) return;
             
             let view = this;
