@@ -16,6 +16,7 @@
   <vg-reported ref="reported" @closeModal="closeModal"></vg-reported>
   <vg-refresh ref="refresh" v-if="this.$route.name == 'Homepage'"></vg-refresh>
   <vg-cookies></vg-cookies>
+  <vg-splash ref="splash" @closeModal="closeModal"></vg-splash>
 </template>
 
 <script>
@@ -25,6 +26,7 @@ import VgMenu from "./components/VgMenu.vue";
 import VgLoading from "./components/VgLoading.vue";
 import VgFilters from "./components/VgFilters.vue";
 import VgChampions from "./modals/VgChampions.vue";
+import VgSplash from "./modals/VgSplash.vue";
 import VgRoles from "./modals/VgRoles.vue";
 import VgRanks from "./modals/VgRanks.vue";
 import VgSources from "./modals/VgSources.vue";
@@ -37,7 +39,7 @@ import axios from 'axios';
 import { useHead } from "@vueuse/head";
 
 export default {
-  components: { VgHeader, VgLoading, VgFilters, VgChampions, VgRanks, VgRoles, VgSources, VgTags, VgSignin, VgMenu, VgCookies, VgReported, VgRefresh},
+  components: { VgHeader, VgLoading, VgFilters, VgChampions, VgRanks, VgRoles, VgSources, VgTags, VgSignin, VgMenu, VgCookies, VgReported, VgRefresh, VgSplash},
 
   data() { return { 
     loaded: false, 
@@ -71,6 +73,7 @@ export default {
     }
 
     this.loaded = true;
+    this.$refs.splash.init();
   },
 
   mounted: function(){
@@ -259,9 +262,10 @@ export default {
       }
     },
 
-    closeModal: function(){
-      console.log('CLOSING MODAL');
+    closeModal: function(type){
+      console.log('CLOSING MODAL', type);
       if(this.$refs.refresh) this.$refs.refresh.stopRefresh = false;
+      if(type) this.currentModal = this.$refs[type].$el;
       this.currentModal.classList.remove('show');
       this.currentModal.removeAttribute('vid');
       this.changeEditingModal(false);

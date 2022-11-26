@@ -1,0 +1,30 @@
+#vg-splash {
+
+    .container {
+        padding: 0;
+        position: relative;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        .buttons {
+            position: absolute;
+            bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            .button {
+
+                img {
+                    max-width: 210px;
+                }
+                
+            }
+        }
+
+        .main {
+            width: 100%;
+        }
+    }
+}

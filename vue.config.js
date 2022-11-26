@@ -15,6 +15,7 @@ module.exports = {
             @import "@/scss/modals/_ranks.scss";
             @import "@/scss/modals/_roles.scss";
             @import "@/scss/modals/_sources.scss";
+            @import "@/scss/modals/_splash.scss";
             @import "@/scss/modals/_tags.scss";
             @import "@/scss/modals/_signin.scss";
             @import "@/scss/modals/_about.scss";

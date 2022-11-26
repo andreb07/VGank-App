@@ -27,6 +27,7 @@
     "ts-md5": "^1.2.10",
     "vue": "^3.2.21",
     "vue-meta": "^3.0.0-alpha.2",
+    "vue-mobile-detection": "^2.0.1",
     "vue-plugin-load-script": "^2.1.0",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
