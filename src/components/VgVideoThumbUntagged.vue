@@ -42,10 +42,10 @@
                 </div>
                 <div v-else class="champs">
                     <div class="filter champion clickable" v-for="champ in videoChamps" :key="champ.id" :style="'background-image:url(' + champ.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
-                        <label>{{champ.name}}</label>
+                        <label v-html="champ.name"></label>
                     </div>
                     <div v-if="videoChamps2" class="filter champion clickable" :style="'background-image:url(' + videoChamps2.image + ');'" @click="$emit('openModal', 'champions',{vid:data.id, vidtype:this.type});">
-                        <label>{{videoChamps2.name}}</label>
+                        <label v-html="videoChamps2.name"></label>
                     </div>
                 </div>                
 

@@ -28,11 +28,11 @@
        
             <div class="filters">
                 <div class="filter champion" v-for="champ in videoChamps" :key="champ.id" :style="'background-image:url(' + champ.image + ');'">
-                    <label>{{champ.name}}</label>
+                    <label v-html="champ.name"></label>
                 </div>
 
                 <div class="filter champion" v-for="champ in videoChamps2" :key="champ.id" :style="'background-image:url(' + champ.image + ');'">
-                    <label>{{champ.name}}</label>
+                    <label v-html="champ.name"></label>
                 </div>
 
                 <div class="filter rank" v-for="rank in videoRanks" :key="rank.id" :style="'background-image:url(' + rank.image + ');'">
